@@ -1,19 +1,42 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Timestamp } from 'typeorm';
 
 @Entity()
 export class Workshop {
+  //! without attributes ( Tags(WorkshopID, Tag) )
+
   @PrimaryGeneratedColumn()
-  workshop_id: number;
+  WorkshopID: string;
 
   @Column()
-  workshop_name: string;
+  StartTime: Timestamp;
 
   @Column()
-  organization_name: string;
+  EndTime: Timestamp;
 
   @Column()
-  instructor_name: string;
+  Capacity: number;
 
   @Column()
-  location: string;
+  Cost: number;
+
+  @Column()
+  Name: string;
+
+  @Column()
+  Place: string;
+
+  @Column()
+  DeadlineTime: Timestamp;
+
+  @Column()
+  PublishTime: Timestamp;
+
+  @Column()
+  Description: string;
+
+  @Column()
+  SpeakerName: string;
+
+  @Column()
+  PictureURL: string;
 }
