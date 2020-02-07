@@ -73,3 +73,15 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
   Nest is [MIT licensed](LICENSE).
+
+# Database 
+
+Notes from Pon, to any other backend developers
+
+## Matcher.sql
+
+A self-contained file that already has tables generated, can test the backend with MySQL workbench.
+
+## SE_Matcher_script.sql
+
+A sql script used for generating all tables in the `Matcher.sql`
