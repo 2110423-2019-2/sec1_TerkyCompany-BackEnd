@@ -20,10 +20,10 @@ export class WorkshopsService {
   }
 
   async update(workshop: Workshop): Promise<UpdateResult> {
-    return await this.workshopRepository.update(workshop.WorkshopID, workshop);
+    return await this.workshopRepository.update(workshop.id, workshop);
   }
 
-  async delete(WorkshopID): Promise<DeleteResult> {
-    return await this.workshopRepository.delete(WorkshopID);
+  async delete(id): Promise<DeleteResult> {
+    return await this.workshopRepository.delete(id);
   }
 }

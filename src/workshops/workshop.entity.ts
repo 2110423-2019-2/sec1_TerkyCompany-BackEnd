@@ -5,38 +5,41 @@ export class Workshop {
   //! without attributes ( Tags(WorkshopID, Tag) )
 
   @PrimaryGeneratedColumn()
-  WorkshopID: string;
+  id: string;
 
   @Column()
-  StartTime: Timestamp;
+  startTime: Timestamp;
 
   @Column()
-  EndTime: Timestamp;
+  endTime: Timestamp;
 
   @Column()
-  Capacity: number;
+  capacity: number;
 
   @Column()
-  Cost: number;
+  cost: number;
 
   @Column()
-  Name: string;
+  name: string;
 
   @Column()
-  Place: string;
+  place: string;
 
   @Column()
-  DeadlineTime: Timestamp;
+  deadlineTime: Timestamp;
 
   @Column()
-  PublishTime: Timestamp;
+  publishTime: Timestamp;
 
   @Column()
-  Description: string;
+  description: string;
 
   @Column()
-  SpeakerName: string;
+  speakerName: string;
 
   @Column()
-  PictureURL: string;
+  pictureURL: string;
+
+  @Column()
+  tag: string;
 }

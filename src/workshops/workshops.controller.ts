@@ -24,18 +24,15 @@ export class WorkshopsController {
     return this.workshopsServices.create(workshopData);
   }
 
-  @Put(':workshop_id/update')
-  async update(
-    @Param('workshop_id') workshop_id,
-    @Body() workshopData: Workshop,
-  ): Promise<any> {
-    workshopData.workshop_id = Number(workshop_id);
-    console.log('Update #' + workshopData.workshop_id);
+  @Put(':id/update')
+  async update(@Param('id') id, @Body() workshopData: Workshop): Promise<any> {
+    workshopData.id = String(id);
+    console.log('Update #' + workshopData.id);
     return this.workshopsServices.update(workshopData);
   }
 
-  @Delete(':workshop_id/delete')
-  async delete(@Param('workshop_id') workshop_id): Promise<any> {
-    return this.workshopsServices.delete(workshop_id);
+  @Delete(':id/delete')
+  async delete(@Param('id') id): Promise<any> {
+    return this.workshopsServices.delete(id);
   }
 }
