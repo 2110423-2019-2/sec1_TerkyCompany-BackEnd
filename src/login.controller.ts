@@ -22,7 +22,7 @@ export class loginController {
   */
   @Post()
   async create(@Body() loginData: loginDto) {
-      console.log(`post success with ${loginData} ${loginData.name}`);
+      console.log(`post got with ${loginData} ${loginData.name}`);
     return `#${loginData.name} ${loginData.password}`;
   }
 }
