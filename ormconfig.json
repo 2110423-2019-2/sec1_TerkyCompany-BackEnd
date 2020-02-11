@@ -5,6 +5,6 @@
     "username": "root",
     "password": "หฟหถๆไเ้ๅกพำ",
     "database": "se_matcher",
-    "entities": ["src/**/**.entity{.ts,.js}"],
+    "entities": ["dist/**/*.entity.js"],
     "synchronize": true
   }
