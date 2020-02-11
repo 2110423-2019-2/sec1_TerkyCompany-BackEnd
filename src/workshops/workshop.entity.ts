@@ -8,10 +8,10 @@ export class Workshop {
   id: string;
 
   @Column()
-  startTime: Timestamp;
+  startTime: Date;
 
   @Column()
-  endTime: Timestamp;
+  endTime: Date;
 
   @Column()
   capacity: number;
@@ -26,10 +26,10 @@ export class Workshop {
   place: string;
 
   @Column()
-  deadlineTime: Timestamp;
+  deadlineTime: Date;
 
   @Column()
-  publishTime: Timestamp;
+  publishTime: Date;
 
   @Column()
   description: string;
