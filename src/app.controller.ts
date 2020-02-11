@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
+import { get } from 'http';
 
 @Controller()
 export class AppController {
@@ -9,4 +10,12 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+/*
+  @Get(':id') 
+    findOne(@Param('id') id:string) {
+      return `This action returns a #${id}`
+*/
+
+
+
 }
