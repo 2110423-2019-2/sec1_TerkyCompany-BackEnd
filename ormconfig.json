@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": 3306,
     "username": "root",
-    "password": "fg01g9gh1dfg1d",
+    "password": "หฟหถๆไเ้ๅกพำ",
     "database": "se_matcher",
     "entities": ["src/**/**.entity{.ts,.js}"],
     "synchronize": true

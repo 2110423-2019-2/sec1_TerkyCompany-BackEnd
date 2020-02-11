@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class member_t {
+export class User {
 
     @PrimaryGeneratedColumn()
     username: string;
