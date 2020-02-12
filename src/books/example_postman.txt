@@ -1,0 +1,9 @@
+//post http://localhost:3000/books
+//body
+{
+	"username": "endy",
+	"workshopid":"1",
+	"timebooked" :"2541-02-02",
+	"hasparticipated" : "false",
+	"transactiondetails" : "paid"
+}
