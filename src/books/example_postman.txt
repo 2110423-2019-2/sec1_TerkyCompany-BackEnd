@@ -1,5 +1,5 @@
-//post http://localhost:3000/books
-//body
+POST EXAMPLE
+POST : http://localhost:3000/books
 {
 	"username": "endy",
 	"workshopid":"1",
@@ -7,3 +7,9 @@
 	"hasparticipated" : "false",
 	"transactiondetails" : "paid"
 }
+GET EXAMPLE
+http://localhost:3000/books/endy/1
+
+
+DELETE EXAMPLE
+delete : http://localhost:3000/books/endy/1
