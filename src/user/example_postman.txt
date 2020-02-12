@@ -1,0 +1,19 @@
+POST EXAMPLE
+POST : http://localhost:3000/users
+{
+    "username": "endy",
+    "password": "134",
+    "fullname": "TNY",
+    "dateofbirth": "2541-02-02",
+    "gender": "m",
+    "email": "too@gmail.com",
+    "issuspended": "true",
+    "participantflag": "true",
+    "university": "cu",
+    "ownerflag": "true",
+    "organization": "too@co",
+    "nationalid": "12301011110111"
+}
+
+DELETE EXAMPLE
+delete : http://localhost:3000/users/endy

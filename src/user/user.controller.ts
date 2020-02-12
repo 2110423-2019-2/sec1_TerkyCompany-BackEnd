@@ -19,9 +19,9 @@ export class UsersController {
     }
 
     @Post()
-    create(@Body() user: user) {
+    create(@Body() userData: user) {
        // console.log(`user got by ${user.password} ${user.username}`);
-        return this.service.getUser(user.username);
+        return this.service.createUser(userData)
     }
 
     @Put()
