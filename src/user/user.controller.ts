@@ -1,11 +1,17 @@
 import { Controller, Post, Body, Get, Put, Delete,Param} from '@nestjs/common';
 import { UsersService } from './user.service';
 import { user } from './user.entity';
+import { get } from 'http';
 
 @Controller('users')
 export class UsersController {
 
     constructor(private service: UsersService) { }
+
+    @Get()
+    findAll(): string {
+        return 'users page';
+    }
 
     @Get(':id')
     get(@Param() params) {
