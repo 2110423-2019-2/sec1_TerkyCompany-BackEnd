@@ -14,16 +14,6 @@ export class UsersController {
         return 'users page';
     }
 
-    @Get('/login')
-    loginPage(@Req() request:Request):string {
-        return 'login page';
-    }
-
-    @Get('/regis')
-    regisPage(@Req() request:Request):string {
-        return 'regis page';
-    }
-
     @Get(':id')
     get(@Param() params) {
         return this.service.getUser(params.id);
@@ -35,13 +25,6 @@ export class UsersController {
         return this.service.createUser(userData)
     }
 
-    //simulation for registeration
-    @Post('/regis')
-    regis(@Body() userData: user) {
-        return this.service.createUser(userData)
-    }
-    
-
     @Put()
     update(@Body() user: user) {
         return this.service.updateUser(user);
@@ -50,5 +33,21 @@ export class UsersController {
     @Delete(':id')
     deleteUser(@Param() params) {
         return this.service.deleteUser(params.id);
+    }
+    
+    @Get('/login')
+    loginPage(@Req() request:Request):string {
+        return 'login page';
+    }
+
+    @Get('/regis')
+    regisPage(@Req() request:Request):string {
+        return 'regis page';
+    }
+    //http post for registeration
+    //_userData for non public var
+    @Post('/regis')
+    regis(@Body() _userData: user) {
+        return this.service.createUser(_userData)
     }
 }
