@@ -24,6 +24,7 @@ export class BooksService {
         this.feedbackRepository.save(booksData)
     }
 
+    //delete with 2 keys
     async deleteBook(username: string,workshopid :string) {
         this.feedbackRepository.delete({"username":username,"workshopid":workshopid});
     }

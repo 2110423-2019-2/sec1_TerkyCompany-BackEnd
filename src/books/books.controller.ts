@@ -9,7 +9,7 @@ export class BookController {
     constructor(private service: BooksService) { }
 
     @Get()
-    findAll(): string {
+    bookPage(): string {
         return 'book page';
     }
 
