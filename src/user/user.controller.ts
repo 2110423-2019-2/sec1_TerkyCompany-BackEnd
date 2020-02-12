@@ -14,6 +14,7 @@ export class UsersController {
 
     @Post()
     create(@Body() user: user) {
+       // console.log(`user got by ${user.password} ${user.username}`);
         return this.service.getUser(user.username);
     }
 

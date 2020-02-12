@@ -6,19 +6,19 @@ export class user {
     @PrimaryGeneratedColumn()
     username: string;
 
-    @Column({ length: 25 })
+    @Column()
     password:string;
 
-    @Column({ length: 25 })
+    @Column()
     fullname:string;
 
-    @Column('date') 
+    @Column() 
     dateofbirth:Date;
 
-    @Column({ length: 25 })
+    @Column()
     gender:string;
 
-    @Column({ length: 25 })
+    @Column()
     email:string;
 
     @Column() 
@@ -27,15 +27,15 @@ export class user {
     @Column() 
     participantflag:boolean;
 
-    @Column({ length: 25 })
+    @Column()
     university:string;
 
     @Column() 
     ownerflag:boolean;
 
-    @Column({ length: 25 })
+    @Column()
     organization:string;
 
-    @Column({ length: 25 })
+    @Column()
     nationalid:string;
 }
