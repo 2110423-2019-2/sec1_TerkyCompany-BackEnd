@@ -23,8 +23,8 @@ export class FeedbackService {
         this.feedbackRepository.save(feedback)
     }
 
-    async deleteUser(feedback: feedback) {
-        this.feedbackRepository.delete(feedback);
+    async deleteUser(feedbackid: string) {
+        this.feedbackRepository.delete(feedbackid);
     }
 
     async createFeedback(feedback: feedback): Promise<feedback> {

@@ -31,6 +31,7 @@ export class FeedbackController {
 
     @Delete(':id')
     async deleteUser(@Param() params) {
+        console.log(`feedbackid : ${params.id}`)
         return this.service.deleteUser(params.id);
     }
 }
