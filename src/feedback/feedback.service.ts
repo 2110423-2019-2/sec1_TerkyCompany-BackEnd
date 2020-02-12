@@ -7,23 +7,23 @@ import { feedback } from './feedback.entity';
 export class FeedbackService {
 
     constructor(@InjectRepository(feedback) private feedbackRepository: Repository<feedback>) { }
-
-    async getUsers(feedback: feedback): Promise<feedback[]> {
+    //use for get "all" feedback at once json
+    async getFeedbacks(feedback: feedback): Promise<feedback[]> {
         return await this.feedbackRepository.find();
     }
-
-    async getUser(feedbackid: string): Promise<feedback[]> {
+    //use for get specified feedback 
+    async getFeedback(feedbackid: string): Promise<feedback[]> {
         return await this.feedbackRepository.find({
             select: ["comment","username"],
             where: [{ "username": feedbackid }]
         });
     }
 
-    async updateUser(feedback: feedback) {
+    async updateFeedback(feedback: feedback) {
         this.feedbackRepository.save(feedback)
     }
 
-    async deleteUser(feedbackid: string) {
+    async deleteFeedback(feedbackid: string) {
         this.feedbackRepository.delete(feedbackid);
     }
 

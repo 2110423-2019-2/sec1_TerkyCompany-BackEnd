@@ -12,10 +12,10 @@ export class FeedbackController {
     findAll(): string {
         return 'feedback page';
     }
-
+    //access by goto localhost3000/feedback/1
     @Get(':id')
     get(@Param() params) {
-        return this.service.getUser(params.id);
+        return this.service.getFeedback(params.id);
     }
 
     @Post()
@@ -26,12 +26,12 @@ export class FeedbackController {
 
     @Put()
     async update(@Body() feedback: feedback) {
-        return this.service.updateUser(feedback);
+        return this.service.updateFeedback(feedback);
     }
 
     @Delete(':id')
     async deleteUser(@Param() params) {
         console.log(`feedbackid : ${params.id}`)
-        return this.service.deleteUser(params.id);
+        return this.service.deleteFeedback(params.id);
     }
 }
