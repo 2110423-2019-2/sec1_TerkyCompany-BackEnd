@@ -1,7 +1,8 @@
-import { Controller, Post, Body, Get, Put, Delete,Param} from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete,Param, Req} from '@nestjs/common';
 import { UsersService } from './user.service';
 import { user } from './user.entity';
 import { get } from 'http';
+import { Request } from 'express';
 
 @Controller('users')
 export class UsersController {
@@ -11,6 +12,16 @@ export class UsersController {
     @Get()
     findAll(): string {
         return 'users page';
+    }
+
+    @Get('/login')
+    loginPage(@Req() request:Request):string {
+        return 'login page';
+    }
+
+    @Get('/regis')
+    regisPage(@Req() request:Request):string {
+        return 'regis page';
     }
 
     @Get(':id')
@@ -23,6 +34,13 @@ export class UsersController {
        // console.log(`user got by ${user.password} ${user.username}`);
         return this.service.createUser(userData)
     }
+
+    //simulation for registeration
+    @Post('/regis')
+    regis(@Body() userData: user) {
+        return this.service.createUser(userData)
+    }
+    
 
     @Put()
     update(@Body() user: user) {
