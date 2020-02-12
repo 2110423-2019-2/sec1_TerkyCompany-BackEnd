@@ -28,7 +28,7 @@ export class UsersController {
     update(@Body() user: user) {
         return this.service.updateUser(user);
     }
-
+    //send key to delete
     @Delete(':id')
     deleteUser(@Param() params) {
         return this.service.deleteUser(params.id);
