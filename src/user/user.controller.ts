@@ -4,7 +4,8 @@ import { user } from './user.entity';
 import { get } from 'http';
 import { Request } from 'express';
 
-@Controller('users')
+//try localhost:3000/regis or localhost:3000/login 
+@Controller()
 export class UsersController {
 
     constructor(private service: UsersService) { }
@@ -14,10 +15,10 @@ export class UsersController {
         return 'users page';
     }
 
-    @Get(':id')
+    /*@Get('/:id')
     get(@Param() params) {
         return this.service.getUser(params.id);
-    }
+    }*/
 
     @Post()
     create(@Body() userData: user) {
