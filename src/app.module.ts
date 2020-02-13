@@ -8,6 +8,7 @@ import { MembersTModule } from './members-t/members-t.module';
 import { CardDetailsModule } from './card-details/card-details.module';
 import { FeedbacksModule } from './feedbacks/feedbacks.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { BooksModule } from './books/books.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ReviewsModule } from './reviews/reviews.module';
     CardDetailsModule,
     FeedbacksModule,
     ReviewsModule,
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
