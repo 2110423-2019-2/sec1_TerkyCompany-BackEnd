@@ -9,6 +9,7 @@ import { CardDetailsModule } from './card-details/card-details.module';
 import { FeedbacksModule } from './feedbacks/feedbacks.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { BooksModule } from './books/books.module';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { BooksModule } from './books/books.module';
     FeedbacksModule,
     ReviewsModule,
     BooksModule,
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
