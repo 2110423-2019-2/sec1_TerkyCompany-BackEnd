@@ -4,13 +4,8 @@ import { AppService } from './app.service';
 import { WorkshopsModule } from './workshops/workshops.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
-import { Workshop } from './workshops/workshop.entity';
-import { WorkshopsController } from './workshops/workshops.controller';
-import { WorkshopsService } from './workshops/workshops.service';
 import { MembersTModule } from './members-t/members-t.module';
-import { MemberTEntity } from './members-t/member-t.entity';
-import { MembersTService } from './members-t/members-t.service';
-import { MembersTController } from './members-t/members-t.controller';
+import { CardDetailsModule } from './card-details/card-details.module';
 
 @Module({
   imports: [
@@ -26,6 +21,7 @@ import { MembersTController } from './members-t/members-t.controller';
     }),
     WorkshopsModule,
     MembersTModule,
+    CardDetailsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

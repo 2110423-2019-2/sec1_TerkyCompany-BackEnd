@@ -20,9 +20,9 @@ export class MembersTController {
 
   @Post('create')
   async create(@Body() memberTData: MemberTEntity): Promise<any> {
-    console.log('CREATE WEIIIII');
-    console.log(memberTData.username);
-    console.log(memberTData.password);
+    // console.log('CREATE WEIIIII');
+    // console.log(memberTData.username);
+    // console.log(memberTData.password);
 
     return this.membersTServices.create(memberTData);
   }
