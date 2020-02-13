@@ -7,6 +7,10 @@ import { join } from 'path';
 import { Workshop } from './workshops/workshop.entity';
 import { WorkshopsController } from './workshops/workshops.controller';
 import { WorkshopsService } from './workshops/workshops.service';
+import { MembersTModule } from './members-t/members-t.module';
+import { MemberTEntity } from './members-t/member-t.entity';
+import { MembersTService } from './members-t/members-t.service';
+import { MembersTController } from './members-t/members-t.controller';
 
 @Module({
   imports: [
@@ -20,10 +24,10 @@ import { WorkshopsService } from './workshops/workshops.service';
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Workshop]),
     WorkshopsModule,
+    MembersTModule,
   ],
-  controllers: [AppController, WorkshopsController],
-  providers: [AppService, WorkshopsService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
