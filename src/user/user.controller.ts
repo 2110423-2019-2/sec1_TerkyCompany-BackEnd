@@ -4,8 +4,8 @@ import { user } from './user.entity';
 import { get } from 'http';
 import { Request } from 'express';
 
-//try localhost:3000/regis or localhost:3000/login 
-@Controller()
+//try localhost:3000/users/regis or localhost:3000/users/login 
+@Controller('/users')
 export class UsersController {
 
     constructor(private service: UsersService) { }
