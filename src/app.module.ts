@@ -7,6 +7,7 @@ import { join } from 'path';
 import { MembersTModule } from './members-t/members-t.module';
 import { CardDetailsModule } from './card-details/card-details.module';
 import { FeedbacksModule } from './feedbacks/feedbacks.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { FeedbacksModule } from './feedbacks/feedbacks.module';
     MembersTModule,
     CardDetailsModule,
     FeedbacksModule,
+    ReviewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
