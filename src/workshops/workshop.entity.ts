@@ -1,14 +1,6 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  Timestamp,
-  ManyToOne,
-  OneToMany,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
-import { ReviewsService } from 'src/reviews/reviews.service';
 import { BookEntity } from 'src/books/book.entity';
 
 @Entity()

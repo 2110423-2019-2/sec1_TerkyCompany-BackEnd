@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BookEntity } from './book.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
+import { Workshop } from 'src/workshops/workshop.entity';
 
 @Injectable()
 export class BooksService {
@@ -21,13 +22,16 @@ export class BooksService {
 
   async update(bookEntity: BookEntity): Promise<UpdateResult> {
     return await this.bookRepository.update(
-      [bookEntity.workshop.id, bookEntity.memberT.username],
+      { workshop: bookEntity.workshop, memberT: bookEntity.memberT },
       bookEntity,
     );
   }
 
   // ! Not sure about how to delete with 2 parameters
-  async delete(id, username): Promise<DeleteResult> {
-    return await this.bookRepository.delete([id, username]);
+  async delete(workshop, memberT): Promise<DeleteResult> {
+    return await this.bookRepository.delete({
+      workshop: workshop,
+      memberT: memberT,
+    });
   }
 }

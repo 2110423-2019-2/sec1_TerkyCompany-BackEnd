@@ -20,10 +20,6 @@ export class BooksController {
 
   @Post('create')
   async create(@Body() bookData: BookEntity): Promise<any> {
-    // console.log('CREATE WEIIIII');
-    // console.log(memberTData.username);
-    // console.log(memberTData.password);
-
     return this.bookServices.create(bookData);
   }
 
