@@ -1,9 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, Timestamp } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Timestamp,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { TagEntity } from 'src/tags/tag.entity';
+import { ReviewEntity } from 'src/reviews/review.entity';
+import { ReviewsService } from 'src/reviews/reviews.service';
 
 @Entity()
 export class Workshop {
-  //! without attributes ( Tags(WorkshopID, Tag) )
-
   @PrimaryGeneratedColumn()
   id: string;
 
@@ -40,6 +48,15 @@ export class Workshop {
   @Column()
   pictureURL: string;
 
-  @Column()
-  tag: string;
+  @OneToMany(
+    type => TagEntity,
+    tag => tag.workshop,
+  )
+  tag: TagEntity[];
+
+  @OneToMany(
+    type => ReviewEntity,
+    review => review.workshop,
+  )
+  review: ReviewEntity[];
 }
