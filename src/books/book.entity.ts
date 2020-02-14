@@ -1,14 +1,30 @@
-import { Entity, Column, PrimaryColumn, Timestamp, ManyToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  Timestamp,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Workshop } from 'src/workshops/workshop.entity';
 import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Entity()
 export class BookEntity {
   // ! Workshop.id & MemberT.username is the primary key
-  @ManyToMany(type => Workshop)
+  @PrimaryColumn()
+  @ManyToOne(
+    type => Workshop,
+    workshop => workshop.books,
+  )
   workshop: Workshop;
 
-  @ManyToMany(type => MemberTEntity)
+  @PrimaryColumn()
+  @ManyToOne(
+    type => MemberTEntity,
+    memberT => memberT.books,
+  )
   memberT: MemberTEntity;
 
   @Column({ nullable: true })

@@ -30,7 +30,7 @@ export class ReviewEntity {
 
   @ManyToOne(
     type => MemberTEntity,
-    memberT => memberT.review,
+    memberT => memberT.reviews,
   )
   memberT: MemberTEntity;
 }

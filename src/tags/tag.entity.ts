@@ -7,14 +7,14 @@ export class TagEntity {
   @PrimaryColumn()
   @ManyToOne(
     type => Workshop,
-    workshop => workshop.tag,
+    workshop => workshop.tags,
   )
   workshop: Workshop;
 
   @PrimaryColumn()
   @ManyToOne(
     type => MemberTEntity,
-    memberT => memberT.tag,
+    memberT => memberT.tags,
   )
   memberT: MemberTEntity;
 

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, OneToOne } from 'typeorm';
+import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Entity()
 export class CardDetailEntity {
@@ -8,5 +9,6 @@ export class CardDetailEntity {
   @Column({ nullable: true })
   expireDate: Date;
 
-  // weak relation from memberTEntity
+  @OneToOne(type => MemberTEntity)
+  cardDetail: CardDetailEntity;
 }

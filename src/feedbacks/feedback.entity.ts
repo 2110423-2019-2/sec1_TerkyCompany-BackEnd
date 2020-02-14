@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, OneToOne } from 'typeorm';
+import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Entity()
 export class FeedbackEntity {
@@ -7,4 +8,7 @@ export class FeedbackEntity {
 
   @Column({ nullable: true })
   comment: string;
+
+  @OneToOne(type => MemberTEntity)
+  memberT: MemberTEntity;
 }

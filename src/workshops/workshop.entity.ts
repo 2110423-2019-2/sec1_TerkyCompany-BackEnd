@@ -9,6 +9,7 @@ import {
 import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { ReviewsService } from 'src/reviews/reviews.service';
+import { BookEntity } from 'src/books/book.entity';
 
 @Entity()
 export class Workshop {
@@ -50,13 +51,19 @@ export class Workshop {
 
   @OneToMany(
     type => TagEntity,
-    tag => tag.workshop,
+    tags => tags.workshop,
   )
-  tag: TagEntity[];
+  tags: TagEntity[];
 
   @OneToMany(
     type => ReviewEntity,
-    review => review.workshop,
+    reviews => reviews.workshop,
   )
-  review: ReviewEntity[];
+  reviews: ReviewEntity[];
+
+  @OneToMany(
+    type => BookEntity,
+    books => books.workshop,
+  )
+  books: BookEntity[];
 }

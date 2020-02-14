@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryColumn, OneToMany, OneToOne } from 'typeorm';
 import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
+import { BookEntity } from 'src/books/book.entity';
 
 @Entity()
 export class MemberTEntity {
@@ -43,13 +44,19 @@ export class MemberTEntity {
 
   @OneToMany(
     type => TagEntity,
-    tag => tag.memberT,
+    tags => tags.memberT,
   )
-  tag: TagEntity[];
+  tags: TagEntity[];
 
   @OneToMany(
     type => ReviewEntity,
-    review => review.memberT,
+    reviews => reviews.memberT,
   )
-  review: ReviewEntity[];
+  reviews: ReviewEntity[];
+
+  @OneToMany(
+    type => BookEntity,
+    books => books.memberT,
+  )
+  books: BookEntity[];
 }
