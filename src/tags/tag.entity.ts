@@ -4,13 +4,13 @@ import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Entity()
 export class TagEntity {
-  @PrimaryColumn('varchar')
+  @PrimaryColumn('varchar', { length: 20 })
   @ManyToOne(
     type => Workshop,
     workshop => workshop.tags,
   )
   workshop: Workshop;
 
-  @PrimaryColumn('varchar')
+  @PrimaryColumn('varchar', { length: 30 })
   tag: string;
 }

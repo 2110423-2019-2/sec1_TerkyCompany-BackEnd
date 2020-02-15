@@ -3,10 +3,10 @@ import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Entity()
 export class FeedbackEntity {
-  @PrimaryColumn()
+  @PrimaryColumn('varchar', { length: 20 })
   id: string;
 
-  @Column({ nullable: true })
+  @Column('text', { nullable: false })
   comment: string;
 
   @OneToOne(type => MemberTEntity)

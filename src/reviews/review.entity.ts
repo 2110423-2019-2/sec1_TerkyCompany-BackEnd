@@ -12,23 +12,18 @@ import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Entity()
 export class ReviewEntity {
-  @PrimaryColumn()
+  @PrimaryColumn('varchar', { length: 20 })
   id: string;
 
-  @Column({ nullable: false })
+  @Column('decimal', { precision: 2, scale: 1, nullable: false })
   rating: number;
 
-  // ! It should be Datetime
-  @CreateDateColumn({ nullable: false })
+  @Column('datetime', { nullable: false })
   timeWritten: Date;
 
-  // We can only rate but no comment.
-  @Column({ nullable: true })
+  @Column('text', { nullable: false })
   comment: string;
 
-  // ? How to do total participation ( my own handling ? )
-  // ! Total many to one (MemberT username)
-  // ! Total many to one (Workshop id)
   @ManyToOne(
     type => Workshop,
     workshop => workshop.reviews,

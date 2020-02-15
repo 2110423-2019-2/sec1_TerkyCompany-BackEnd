@@ -1,45 +1,45 @@
-import { Entity, Column, PrimaryColumn, OneToMany, OneToOne } from 'typeorm';
-import { TagEntity } from 'src/tags/tag.entity';
+import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
 
 @Entity()
 export class MemberTEntity {
-  @PrimaryColumn()
+  @PrimaryColumn('varchar', { length: 20 })
   username: string;
 
-  @Column({ nullable: false })
+  @Column('varchar', { length: 20, nullable: false })
   password: string;
 
-  @Column({ nullable: false })
+  @Column('varchar', { length: 30, nullable: false })
   email: string;
 
-  @Column({ nullable: false })
-  dateOfBirth: Date;
+  // ! WARNING: I hack dateOfBirth to be string
+  @Column('varchar', { length: 10, nullable: false })
+  dateOfBirth: string;
 
-  @Column({ nullable: false })
+  @Column('varchar', { length: 40, nullable: false })
   fullname: string;
 
   // ? Not sure about Type of gender
-  @Column({ nullable: true })
+  @Column('varchar', { length: 1, nullable: false })
   gender: string;
 
-  @Column({ nullable: false })
+  @Column('boolean', { default: false, nullable: false })
   isSuspended: boolean;
 
-  @Column({ nullable: false })
+  @Column('boolean', { nullable: false })
   participationFlag: boolean;
 
-  @Column({ nullable: true })
+  @Column('varchar', { length: 40 })
   university: string;
 
-  @Column({ nullable: false })
+  @Column('boolean', { nullable: false })
   ownerFlag: boolean;
 
-  @Column({ nullable: true })
+  @Column('varchar', { length: 40 })
   organization: string;
 
-  @Column({ nullable: false })
+  @Column('varchar', { length: 13, nullable: false })
   nationalID: string;
 
   @OneToMany(

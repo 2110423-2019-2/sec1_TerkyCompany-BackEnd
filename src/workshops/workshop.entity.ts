@@ -1,44 +1,44 @@
-import { Entity, Column, OneToMany, PrimaryColumn } from 'typeorm';
+import { Entity, Column, OneToMany, PrimaryColumn, Timestamp } from 'typeorm';
 import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
 
 @Entity()
 export class Workshop {
-  @PrimaryColumn('varchar')
+  @PrimaryColumn('varchar', { length: 20 })
   id: string;
 
-  @Column('date')
-  startTime: Date;
+  @Column('timestamp')
+  startTime: Timestamp;
 
-  @Column('date')
-  endTime: Date;
+  @Column('timestamp')
+  endTime: Timestamp;
 
-  @Column('int')
+  @Column('int', { nullable: false })
   capacity: number;
 
-  @Column('int')
+  @Column('decimal', { precision: 7, scale: 2, nullable: false })
   cost: number;
 
-  @Column('varchar')
+  @Column('varchar', { length: 40, nullable: false })
   name: string;
 
-  @Column('varchar')
+  @Column('varchar', { length: 40, nullable: false })
   place: string;
 
-  @Column('date')
-  deadlineTime: Date;
+  @Column('timestamp', { nullable: false })
+  deadlineTime: Timestamp;
 
-  @Column('date')
-  publishTime: Date;
+  @Column('timestamp', { nullable: false })
+  publishTime: Timestamp;
 
   @Column('varchar')
   description: string;
 
-  @Column('varchar')
+  @Column('varchar', { length: 80 })
   speakerName: string;
 
-  @Column('varchar')
+  @Column('varchar', { length: 512 })
   pictureURL: string;
 
   @OneToMany(

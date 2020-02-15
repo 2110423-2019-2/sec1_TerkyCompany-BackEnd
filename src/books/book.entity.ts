@@ -11,16 +11,14 @@ import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Entity()
 export class BookEntity {
-  // ! Workshop.id & MemberT.username is the primary key
-  @PrimaryGeneratedColumn()
-  uniqueID: number;
-
+  @PrimaryColumn('varchar', { length: 20 })
   @ManyToOne(
     type => Workshop,
     workshop => workshop.books,
   )
   workshop: Workshop;
 
+  @PrimaryColumn('varchar', { length: 20 })
   @ManyToOne(
     type => MemberTEntity,
     memberT => memberT.books,
@@ -33,6 +31,6 @@ export class BookEntity {
   @Column('boolean', { nullable: true })
   hasParticipated: boolean;
 
-  @Column('varchar', { nullable: true })
+  @Column('varchar', { length: 256, nullable: true })
   transactionDetail: string;
 }
