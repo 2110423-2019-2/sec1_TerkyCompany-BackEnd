@@ -12,12 +12,6 @@ export class TagEntity {
   workshop: Workshop;
 
   @PrimaryColumn()
-  @ManyToOne(
-    type => MemberTEntity,
-    memberT => memberT.tags,
-  )
-  memberT: MemberTEntity;
-
   @Column()
   tag: string;
 }

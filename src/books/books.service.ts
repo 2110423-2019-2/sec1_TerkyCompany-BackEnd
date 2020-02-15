@@ -28,10 +28,10 @@ export class BooksService {
   }
 
   // ! Not sure about how to delete with 2 parameters
-  async delete(workshop, memberT): Promise<DeleteResult> {
+  async delete(id, username): Promise<DeleteResult> {
     return await this.bookRepository.delete({
-      workshop: workshop,
-      memberT: memberT,
+      workshop: id,
+      memberT: username,
     });
   }
 }

@@ -43,12 +43,6 @@ export class MemberTEntity {
   nationalID: string;
 
   @OneToMany(
-    type => TagEntity,
-    tags => tags.memberT,
-  )
-  tags: TagEntity[];
-
-  @OneToMany(
     type => ReviewEntity,
     reviews => reviews.memberT,
   )
