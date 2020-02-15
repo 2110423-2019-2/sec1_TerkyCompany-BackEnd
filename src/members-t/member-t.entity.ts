@@ -14,8 +14,8 @@ export class MemberTEntity {
   email: string;
 
   // ! WARNING: I hack dateOfBirth to be string
-  @Column('varchar', { length: 10, nullable: false })
-  dateOfBirth: string;
+  @Column('date', { nullable: false })
+  dateOfBirth: Date;
 
   @Column('varchar', { length: 40, nullable: false })
   fullname: string;
