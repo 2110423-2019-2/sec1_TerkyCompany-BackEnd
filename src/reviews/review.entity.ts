@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryColumn, Timestamp, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  Timestamp,
+  ManyToOne,
+  CreateDateColumn,
+} from 'typeorm';
 import { Workshop } from 'src/workshops/workshop.entity';
 import { WorkshopsService } from 'src/workshops/workshops.service';
 import { MemberTEntity } from 'src/members-t/member-t.entity';
@@ -12,8 +19,8 @@ export class ReviewEntity {
   rating: number;
 
   // ! It should be Datetime
-  @Column({ nullable: false })
-  timeWritten: Timestamp;
+  @CreateDateColumn({ nullable: false })
+  timeWritten: Date;
 
   // We can only rate but no comment.
   @Column({ nullable: true })
@@ -24,7 +31,7 @@ export class ReviewEntity {
   // ! Total many to one (Workshop id)
   @ManyToOne(
     type => Workshop,
-    workshop => workshop.review,
+    workshop => workshop.reviews,
   )
   workshop: Workshop;
 

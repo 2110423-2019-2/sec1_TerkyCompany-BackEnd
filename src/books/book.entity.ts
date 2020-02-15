@@ -3,7 +3,6 @@ import {
   Column,
   PrimaryColumn,
   Timestamp,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -13,26 +12,27 @@ import { MemberTEntity } from 'src/members-t/member-t.entity';
 @Entity()
 export class BookEntity {
   // ! Workshop.id & MemberT.username is the primary key
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
+  uniqueID: number;
+
   @ManyToOne(
     type => Workshop,
     workshop => workshop.books,
   )
   workshop: Workshop;
 
-  @PrimaryColumn()
   @ManyToOne(
     type => MemberTEntity,
     memberT => memberT.books,
   )
   memberT: MemberTEntity;
 
-  @Column({ nullable: true })
+  @Column('timestamp', { nullable: true })
   timeBooked: Timestamp;
 
-  @Column({ nullable: true })
+  @Column('boolean', { nullable: true })
   hasParticipated: boolean;
 
-  @Column({ nullable: true })
+  @Column('varchar', { nullable: true })
   transactionDetail: string;
 }

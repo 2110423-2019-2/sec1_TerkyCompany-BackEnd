@@ -1,44 +1,44 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, PrimaryColumn } from 'typeorm';
 import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
 
 @Entity()
 export class Workshop {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn('varchar')
   id: string;
 
-  @Column()
+  @Column('date')
   startTime: Date;
 
-  @Column()
+  @Column('date')
   endTime: Date;
 
-  @Column()
+  @Column('int')
   capacity: number;
 
-  @Column()
+  @Column('int')
   cost: number;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('varchar')
   place: string;
 
-  @Column()
+  @Column('date')
   deadlineTime: Date;
 
-  @Column()
+  @Column('date')
   publishTime: Date;
 
-  @Column()
+  @Column('varchar')
   description: string;
 
-  @Column()
+  @Column('varchar')
   speakerName: string;
 
-  @Column()
+  @Column('varchar')
   pictureURL: string;
 
   @OneToMany(
