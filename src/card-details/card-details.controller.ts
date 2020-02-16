@@ -20,25 +20,25 @@ export class CardDetailsController {
 
   @Post('create')
   async create(@Body() cardDetailData: CardDetailEntity): Promise<any> {
-    // console.log('CREATE WEIIIII');
-    // console.log(memberTData.username);
-    // console.log(memberTData.password);
-
     return this.cardDetialServices.create(cardDetailData);
   }
 
-  @Put(':id/update')
+  @Put(':id/:username/update')
   async update(
     @Param('id') id,
+    @Param('username') username,
     @Body() cardDetailData: CardDetailEntity,
   ): Promise<any> {
+    console.log(username);
+    console.log(cardDetailData.memberT);
     cardDetailData.id = String(id);
-    console.log('Update #' + cardDetailData.id);
+    cardDetailData.memberT.username = String(username);
+    console.log('Update #' + cardDetailData.id + ' : ', cardDetailData.memberT);
     return this.cardDetialServices.update(cardDetailData);
   }
 
-  @Delete(':id/delete')
-  async delete(@Param('id') id): Promise<any> {
-    return this.cardDetialServices.delete(id);
+  @Delete(':id/:username/delete')
+  async delete(@Param('id') id, @Param('username') username): Promise<any> {
+    return this.cardDetialServices.delete(id, username);
   }
 }

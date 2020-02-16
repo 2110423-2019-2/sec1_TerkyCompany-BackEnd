@@ -21,12 +21,15 @@ export class CardDetailsService {
 
   async update(cardDetailEntity: CardDetailEntity): Promise<UpdateResult> {
     return await this.cardDetailRepository.update(
-      cardDetailEntity.id,
+      { id: cardDetailEntity.id, memberT: cardDetailEntity.memberT },
       cardDetailEntity,
     );
   }
 
-  async delete(id): Promise<DeleteResult> {
-    return await this.cardDetailRepository.delete(id);
+  async delete(id, username): Promise<DeleteResult> {
+    return await this.cardDetailRepository.delete({
+      id: id,
+      memberT: username,
+    });
   }
 }
