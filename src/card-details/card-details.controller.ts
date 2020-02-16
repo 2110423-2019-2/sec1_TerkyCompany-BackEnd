@@ -30,11 +30,11 @@ export class CardDetailsController {
     @Body() cardDetailData: CardDetailEntity,
   ): Promise<any> {
     console.log(username);
-    console.log(cardDetailData.memberT);
+    console.log(typeof cardDetailData.memberT);
     cardDetailData.id = String(id);
     cardDetailData.memberT = username;
     console.log('Update #' + cardDetailData.id + ' : ', cardDetailData.memberT);
-    return this.cardDetialServices.update(cardDetailData);
+    return this.cardDetialServices.update(id, username, cardDetailData);
   }
 
   @Delete(':id/:username/delete')

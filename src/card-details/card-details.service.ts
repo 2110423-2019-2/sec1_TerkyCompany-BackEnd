@@ -19,9 +19,13 @@ export class CardDetailsService {
     return await this.cardDetailRepository.save(cardDetailEntity);
   }
 
-  async update(cardDetailEntity: CardDetailEntity): Promise<UpdateResult> {
+  async update(
+    id,
+    username,
+    cardDetailEntity: CardDetailEntity,
+  ): Promise<UpdateResult> {
     return await this.cardDetailRepository.update(
-      { id: cardDetailEntity.id, memberT: cardDetailEntity.memberT },
+      { id: id, memberT: username },
       cardDetailEntity,
     );
   }
