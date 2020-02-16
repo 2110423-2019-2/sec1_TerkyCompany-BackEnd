@@ -1,4 +1,4 @@
-import { Entity, Column, OneToMany, PrimaryColumn, Timestamp } from 'typeorm';
+import { Entity, Column, OneToMany, PrimaryColumn, Timestamp, Check } from 'typeorm';
 import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
@@ -29,7 +29,7 @@ export class Workshop {
   @Column('timestamp', { nullable: false })
   deadlineTime: Timestamp;
 
-  @Column('timestamp', { nullable: false })
+  @Column('timestamp', { nullable: false, default: () => "NOW()" }) // Still have to +7 hours to get UTC+7 time but no idea how to do
   publishTime: Timestamp;
 
   @Column('varchar')

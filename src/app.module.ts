@@ -19,7 +19,7 @@ import { TagsModule } from './tags/tags.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '123456',
+      password: 'annoyingAsFuck',
       database: 'se_matcher',
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
