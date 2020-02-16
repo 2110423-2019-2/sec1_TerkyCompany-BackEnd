@@ -15,6 +15,7 @@ export class BookEntity {
   @ManyToOne(
     type => Workshop,
     workshop => workshop.books,
+	{ cascade: true, onDelete: "CASCADE", onUpdate: "CASCADE" }
   )
   workshop: Workshop;
 
@@ -22,6 +23,7 @@ export class BookEntity {
   @ManyToOne(
     type => MemberTEntity,
     memberT => memberT.books,
+	{ cascade: true, onDelete: "CASCADE", onUpdate: "CASCADE" }
   )
   memberT: MemberTEntity;
 

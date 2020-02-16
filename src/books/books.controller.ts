@@ -29,8 +29,8 @@ export class BooksController {
     @Param('username') username,
     @Body() bookData: BookEntity,
   ): Promise<any> {
-    bookData.workshop.id = String(id);
-    bookData.memberT.username = String(username);
+    bookData.workshop = id;
+    bookData.memberT = username;
     console.log('Update #' + bookData.workshop);
     console.log('Update #' + bookData.memberT);
     return this.bookServices.update(bookData);
