@@ -32,7 +32,7 @@ export class CardDetailsController {
     console.log(username);
     console.log(cardDetailData.memberT);
     cardDetailData.id = String(id);
-    cardDetailData.memberT.username = String(username);
+    cardDetailData.memberT = username;
     console.log('Update #' + cardDetailData.id + ' : ', cardDetailData.memberT);
     return this.cardDetialServices.update(cardDetailData);
   }
