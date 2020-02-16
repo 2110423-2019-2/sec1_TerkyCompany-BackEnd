@@ -21,6 +21,10 @@ export class ReviewsController {
 
   @Post('create')
   async create(@Body() reviewData: ReviewEntity): Promise<any> {
+
+	if(reviewData.rating < 0.5) reviewData.rating = 0.5;
+	else if(reviewData.rating > 5.0) reviewData.rating = 5.0;
+
     return this.reviewServices.create(reviewData);
   }
 

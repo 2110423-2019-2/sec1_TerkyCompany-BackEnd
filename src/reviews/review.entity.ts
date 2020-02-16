@@ -18,7 +18,7 @@ export class ReviewEntity {
   @Column('decimal', { precision: 2, scale: 1, nullable: false })
   rating: number;
 
-  @Column('datetime', { nullable: false })
+  @Column('datetime', { nullable: false, default: () => "CURRENT_TIMESTAMP"}) // Still need to change into UTC +7
   timeWritten: Date;
 
   @Column('text', { nullable: false })
