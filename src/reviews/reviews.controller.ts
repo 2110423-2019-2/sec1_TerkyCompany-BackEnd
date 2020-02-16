@@ -46,6 +46,10 @@ export class ReviewsController {
         ' : ' +
         reviewData.memberT,
     );
+
+	if(reviewData.rating < 0.5) reviewData.rating = 0.5;
+	else if(reviewData.rating > 5.0) reviewData.rating = 5.0;
+
     return this.reviewServices.update(reviewData);
   }
 

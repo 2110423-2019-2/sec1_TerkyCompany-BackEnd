@@ -27,7 +27,7 @@ export class BookEntity {
   )
   memberT: MemberTEntity;
 
-  @Column('timestamp', { nullable: true })
+  @Column('timestamp', { nullable: true, default: () => "CURRENT_TIMESTAMP"})
   timeBooked: Timestamp;
 
   @Column('boolean', { nullable: true })

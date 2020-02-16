@@ -36,6 +36,13 @@ export class WorkshopsController {
   async update(@Param('id') id, @Body() workshopData: Workshop): Promise<any> {
     workshopData.id = String(id);
     console.log('Update #' + workshopData.id);
+
+	if(workshopData.cost < 0) workshopData.cost = 0;
+	else if(workshopData.cost > 99999.99) workshopData.cost = 99999.99;
+
+	if(workshopData.capacity < 1) workshopData.capacity = 1;
+	else if(workshopData.capacity > 10000) workshopData.capacity = 10000;
+
     return this.workshopsServices.update(workshopData);
   }
 
