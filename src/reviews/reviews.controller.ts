@@ -24,18 +24,33 @@ export class ReviewsController {
     return this.reviewServices.create(reviewData);
   }
 
-  @Put(':id/update')
+  @Put(':id/:workshop_id/:username/update')
   async update(
     @Param('id') id,
+    @Param('workshop_id') workshop_id,
+    @Param('username') username,
     @Body() reviewData: ReviewEntity,
   ): Promise<any> {
     reviewData.id = String(id);
-    console.log('Update #' + reviewData.id);
+    reviewData.workshop = workshop_id;
+    reviewData.memberT = username;
+    console.log(
+      'Update #' +
+        reviewData.id +
+        ' : ' +
+        reviewData.workshop +
+        ' : ' +
+        reviewData.memberT,
+    );
     return this.reviewServices.update(reviewData);
   }
 
-  @Delete(':id/delete')
-  async delete(@Param('id') id): Promise<any> {
-    return this.reviewServices.delete(id);
+  @Delete(':id/:workshop_id/:username/delete')
+  async delete(
+    @Param('id') id,
+    @Param('workshop_id') workshop_id,
+    @Param('username') username,
+  ): Promise<any> {
+    return this.reviewServices.delete(id, workshop_id, username);
   }
 }

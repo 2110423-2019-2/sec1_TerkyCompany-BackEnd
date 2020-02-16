@@ -9,8 +9,12 @@ export class FeedbackEntity {
   @Column('text', { nullable: false })
   comment: string;
 
-  @PrimaryColumn('varchar', { length: 20 })	
-  @OneToOne(type => MemberTEntity, { cascade: true, onDelete: "CASCADE", onUpdate: "CASCADE" })
+  @PrimaryColumn('varchar', { length: 20 })
+  @OneToOne(type => MemberTEntity, {
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn()
   memberT: MemberTEntity;
 }

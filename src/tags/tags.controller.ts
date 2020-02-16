@@ -17,7 +17,7 @@ export class TagsController {
 
   // ! NO UPDATE/PUT because all attributes is composed of primary key.
 
-  @Delete(':id/:tag/delete')
+  @Delete(':tag/:id/delete')
   async delete(@Param('id') id, @Param('tag') tag): Promise<any> {
     return this.tagServices.delete(id, tag);
   }

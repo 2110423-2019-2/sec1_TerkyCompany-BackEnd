@@ -20,10 +20,21 @@ export class ReviewsService {
   }
 
   async update(reviewEntity: ReviewEntity): Promise<UpdateResult> {
-    return await this.reviewRepository.update(reviewEntity.id, reviewEntity);
+    return await this.reviewRepository.update(
+      {
+        id: reviewEntity.id,
+        workshop: reviewEntity.workshop,
+        memberT: reviewEntity.memberT,
+      },
+      reviewEntity,
+    );
   }
 
-  async delete(id): Promise<DeleteResult> {
-    return await this.reviewRepository.delete(id);
+  async delete(id, workshop_id, username): Promise<DeleteResult> {
+    return await this.reviewRepository.delete({
+      id: id,
+      workshop: workshop_id,
+      memberT: username,
+    });
   }
 }
