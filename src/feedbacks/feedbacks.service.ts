@@ -21,12 +21,15 @@ export class FeedbacksService {
 
   async update(feedbackEntity: FeedbackEntity): Promise<UpdateResult> {
     return await this.feedbackRepository.update(
-      feedbackEntity.id,
+      { id: feedbackEntity.id, memberT: feedbackEntity.memberT },
       feedbackEntity,
     );
   }
 
-  async delete(id): Promise<DeleteResult> {
-    return await this.feedbackRepository.delete(id);
+  async delete(id, username): Promise<DeleteResult> {
+    return await this.feedbackRepository.delete({
+		id,
+		memberT: username
+	});
   }
 }

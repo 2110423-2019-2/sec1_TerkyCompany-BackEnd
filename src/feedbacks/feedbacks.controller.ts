@@ -28,18 +28,20 @@ export class FeedbacksController {
     return this.feedbackServices.create(feedbackData);
   }
 
-  @Put(':id/update')
+  @Put(':id/:username/update')
   async update(
     @Param('id') id,
+	@Param('username') username,
     @Body() feedbackData: FeedbackEntity,
   ): Promise<any> {
     feedbackData.id = String(id);
+	feedbackData.memberT = username;
     console.log('Update #' + feedbackData.id);
     return this.feedbackServices.update(feedbackData);
   }
 
-  @Delete(':id/delete')
-  async delete(@Param('id') id): Promise<any> {
-    return this.feedbackServices.delete(id);
+  @Delete(':id/:username/delete')
+  async delete(@Param('id') id, @Param('username') username): Promise<any> {
+    return this.feedbackServices.delete(id, username);
   }
 }
