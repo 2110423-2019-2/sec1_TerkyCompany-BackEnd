@@ -20,7 +20,7 @@ import { TagsModule } from './tags/tags.module';
       port: 3306,
       username: 'root',
       password: '123456',
-      database: 'db',
+      database: 'terky',
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
     }),
