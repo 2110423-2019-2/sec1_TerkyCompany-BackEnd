@@ -15,13 +15,17 @@ export class BookController {
 
     @Get(':username/:workshopid')
     get(@Param() params) {
+        console.log(`got username:${params.username} password:${params.workshopid}`);
         return this.service.getBook(params.username,params.workshopid);
     }
 
     @Post()
     async create(@Body() booksData: Books) {
        // console.log(`user got by ${user.password} ${user.username}`);
-        return this.service.createBook(booksData);
+        //return this.service.createBook(booksData)
+        console.log("posted");
+        console.log(`got username:${booksData.username} password:${booksData.workshopid}`);
+        return this.service.getBook(booksData.username,booksData.workshopid);
     }
 
     @Put()

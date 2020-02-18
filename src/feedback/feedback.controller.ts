@@ -10,12 +10,14 @@ export class FeedbackController {
 
     @Get()
     findAll(): string {
-        return 'feedback page';
+        return "hello world";
     }
     //access by goto localhost3000/feedback/1
     @Get(':id')
     get(@Param() params) {
-        return this.service.getFeedback(params.id);
+        console.log(`get success with ${params}`);
+        //return this.service.getFeedback(params.id);
+        return {asd:"hello"};
     }
 
     @Post()
