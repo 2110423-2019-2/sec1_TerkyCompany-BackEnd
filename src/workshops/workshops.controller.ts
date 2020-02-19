@@ -19,6 +19,11 @@ export class WorkshopsController {
     return this.workshopsServices.findAll();
   }
 
+  @Get(':workshopid/get')
+    get(@Param() params) {
+        console.log(`got workshopId:${params.workshopid}`);
+        return this.workshopsServices.getWorkshop(params.workshopid);
+    }
   @Post('create')
   async create(@Body() workshopData: Workshop): Promise<any> {
     console.log('cost: ' + workshopData.cost)

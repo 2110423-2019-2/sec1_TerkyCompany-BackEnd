@@ -15,6 +15,13 @@ export class WorkshopsService {
     return await this.workshopRepository.find();
   }
 
+  async getWorkshop(workshopId: string): Promise<Workshop[]> {
+    return await this.workshopRepository.find({
+        //select: ["*"],
+        where: [{ "id": workshopId}]
+    });
+}
+
   async create(workshop: Workshop): Promise<Workshop> {
     return await this.workshopRepository.save(workshop);
   }
