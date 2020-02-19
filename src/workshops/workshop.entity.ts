@@ -35,7 +35,7 @@ export class Workshop {
   @Column('varchar')
   description: string;
 
-  @Column('varchar', { length: 80 })
+  @Column('varchar', { length: 40 })
   speakerName: string;
 
   @Column('varchar', { length: 512 })
