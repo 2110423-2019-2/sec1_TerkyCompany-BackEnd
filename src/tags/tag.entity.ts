@@ -8,6 +8,11 @@ export class TagEntity {
   @ManyToOne(
     type => Workshop,
     workshop => workshop.tags,
+	{
+		cascade: true,
+		onDelete: 'CASCADE',
+		onUpdate: 'CASCADE',
+	}
   )
   workshop: Workshop;
 

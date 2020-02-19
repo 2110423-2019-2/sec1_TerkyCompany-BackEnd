@@ -12,6 +12,7 @@ import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Entity()
 export class ReviewEntity {
+
   @PrimaryColumn('varchar', { length: 20 })
   id: string;
 
@@ -28,6 +29,11 @@ export class ReviewEntity {
   @ManyToOne(
     type => Workshop,
     workshop => workshop.reviews,
+	{
+		cascade: true,
+		onDelete: 'CASCADE',
+		onUpdate: 'CASCADE',
+	}
   )
   workshop: Workshop;
 
@@ -35,6 +41,11 @@ export class ReviewEntity {
   @ManyToOne(
     type => MemberTEntity,
     memberT => memberT.reviews,
+	{
+		cascade: true,
+		onDelete: 'CASCADE',
+		onUpdate: 'CASCADE',
+	}
   )
   memberT: MemberTEntity;
 }

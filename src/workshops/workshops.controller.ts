@@ -26,11 +26,11 @@ export class WorkshopsController {
     return this.workshopsServices.findone(params.id);
   }
 
-  @Get(':workshopid/get')
-    getd(@Param() params) {
-        console.log(`got workshopId:${params.workshopid}`);
-        return this.workshopsServices.getWorkshop(params.workshopid);
-    }
+  @Get(':id')
+  findone(@Param('id') id): Promise<Workshop> {
+    return this.workshopsServices.findByID(id);
+  }
+  
   @Post('create')
   async create(@Body() workshopData: Workshop): Promise<any> {
     console.log('cost: ' + workshopData.cost)
@@ -46,7 +46,7 @@ export class WorkshopsController {
 
   @Put(':id/update')
   async update(@Param('id') id, @Body() workshopData: Workshop): Promise<any> {
-    workshopData.id = String(id);
+    workshopData.id = Number(id);
     console.log('Update #' + workshopData.id);
 
 	if(workshopData.cost < 0) workshopData.cost = 0;

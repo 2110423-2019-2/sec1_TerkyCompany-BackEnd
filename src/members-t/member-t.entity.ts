@@ -2,6 +2,12 @@ import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
 
+export enum Gender
+{
+	Male = "male",
+	Female = "female",
+}
+
 @Entity()
 export class MemberTEntity {
   @PrimaryColumn('varchar', { length: 20 })
@@ -21,7 +27,7 @@ export class MemberTEntity {
   fullname: string;
 
   // ? Not sure about Type of gender
-  @Column('varchar', { length: 1, nullable: false })
+  @Column('enum', { enum: Gender, nullable: false})
   gender: string;
 
   @Column('boolean', { default: false, nullable: false })
@@ -30,8 +36,8 @@ export class MemberTEntity {
   @Column('boolean', { nullable: false })
   participationFlag: boolean;
 
-  @Column('varchar', { length: 40 })
-  university: string;
+  //@Column('varchar', { length: 40 })
+  //university: string;
 
   @Column('boolean', { nullable: false })
   ownerFlag: boolean;
