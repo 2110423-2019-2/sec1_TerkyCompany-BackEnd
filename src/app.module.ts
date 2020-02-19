@@ -19,8 +19,16 @@ import { TagsModule } from './tags/tags.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
+<<<<<<< HEAD
       password: 'หฟหถๆไเ้ๅกพำ',
       database: 'se_matcher',
+||||||| merged common ancestors
+      password: '123456',
+      database: 'db',
+=======
+      password: '123456',
+      database: 'terky',
+>>>>>>> refs/remotes/origin/crud
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
     }),

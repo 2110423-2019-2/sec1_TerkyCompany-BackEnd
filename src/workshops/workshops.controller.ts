@@ -6,9 +6,11 @@ import {
   Delete,
   Body,
   Param,
+  Query,
 } from '@nestjs/common';
 import { Workshop } from './workshop.entity';
 import { WorkshopsService } from './workshops.service';
+
 
 @Controller('workshops')
 export class WorkshopsController {
@@ -18,9 +20,14 @@ export class WorkshopsController {
   index(): Promise<Workshop[]> {
     return this.workshopsServices.findAll();
   }
+  @Get(':id')
+  // indexone(): Promise<any>  
+  async get(@Param() params){
+    return this.workshopsServices.findone(params.id);
+  }
 
   @Get(':workshopid/get')
-    get(@Param() params) {
+    getd(@Param() params) {
         console.log(`got workshopId:${params.workshopid}`);
         return this.workshopsServices.getWorkshop(params.workshopid);
     }
