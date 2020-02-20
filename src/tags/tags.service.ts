@@ -12,7 +12,7 @@ export class TagsService {
   ) {}
 
   async findAll(): Promise<TagEntity[]> {
-    return await this.tagRepository.find();
+    return await this.tagRepository.find(); // {tag: "TAG_NAME"}
   }
 
   async create(tagEntity: TagEntity): Promise<TagEntity> {
