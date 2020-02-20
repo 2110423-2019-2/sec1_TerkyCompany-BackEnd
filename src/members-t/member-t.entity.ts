@@ -47,7 +47,7 @@ export class MemberTEntity {
 
   @Column('varchar', { length: 13, nullable: false })
   nationalID: string;
-
+  
   @OneToMany(
     type => ReviewEntity,
     reviews => reviews.memberT,
@@ -59,4 +59,5 @@ export class MemberTEntity {
     books => books.memberT,
   )
   books: BookEntity[];
+  
 }
