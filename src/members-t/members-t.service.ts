@@ -14,6 +14,7 @@ export class MembersTService {
     @InjectRepository(MemberTEntity)
     private memberTRepository: Repository<MemberTEntity>,
   ) {
+  /*
 	this.memberTEntities = [
 		{
 			username: 'john',
@@ -60,13 +61,14 @@ export class MembersTService {
 			reviews: null,
 			books: null
 		}
-	]
+	]*/
   }
-
-  async findOne(username: string): Promise<MemberTEntity | undefined> {
-  	  return this.memberTEntities.find(memberT => memberT.username === username);
-  }
-
+  
+	async findOne(username: string): Promise<MemberTEntity | undefined> {
+		console.log(username + " is trying to login");
+		return this.memberTRepository.findOne({ username: username});
+	}
+	
   async findAll(): Promise<MemberTEntity[]> {
     return await this.memberTRepository.find();
   }
