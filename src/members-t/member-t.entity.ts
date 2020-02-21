@@ -34,7 +34,7 @@ export class MemberTEntity {
   isSuspended: boolean;
 
   @Column('boolean', { nullable: false })
-  participationFlag: boolean;
+  participantFlag: boolean;
 
   //@Column('varchar', { length: 40 })
   //university: string;
