@@ -2,10 +2,14 @@ import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
 
-export enum Gender
-{
+export enum Gender {
 	Male = "male",
 	Female = "female",
+}
+
+export enum UserType {
+	Participant = "participant",
+	Owner = "owner",
 }
 
 @Entity()
@@ -33,14 +37,8 @@ export class MemberTEntity {
   @Column('boolean', { default: false, nullable: false })
   isSuspended: boolean;
 
-  @Column('boolean', { nullable: false })
-  participantFlag: boolean;
-
-  //@Column('varchar', { length: 40 })
-  //university: string;
-
-  @Column('boolean', { nullable: false })
-  ownerFlag: boolean;
+  @Column('enum', { enum: UserType, nullable: false })
+  userType: string;
 
   @Column('varchar', { length: 40 })
   organization: string;
