@@ -11,6 +11,7 @@ import { FeedbacksModule } from './feedbacks/feedbacks.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { BooksModule } from './books/books.module';
 import { TagsModule } from './tags/tags.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { TagsModule } from './tags/tags.module';
     ReviewsModule,
     BooksModule,
     TagsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
