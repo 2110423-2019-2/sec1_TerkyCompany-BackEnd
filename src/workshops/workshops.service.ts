@@ -15,6 +15,25 @@ export class WorkshopsService {
     return await this.workshopRepository.find();
   }
 
+//   async getWorkshop(workshopId: string): Promise<Workshop[]> {
+//     return await this.workshopRepository.find({
+//         //select: ["*"],
+//         where: [{ "id": workshopId}]
+//     });
+// }
+
+//   async findone(id: string): Promise<any> {
+//     console.log('find one OK')
+//     return await this.workshopRepository.find({ 
+//       select:['name','place','speakerName','startTime','endTime','capacity','cost','pictureURL','description'],
+//       where : [{'id' : id}]
+//     });
+//   }
+// 
+  async findByID(id): Promise<Workshop> {
+    return await this.workshopRepository.findOne(id);
+  }
+
   async create(workshop: Workshop): Promise<Workshop> {
     return await this.workshopRepository.save(workshop);
   }

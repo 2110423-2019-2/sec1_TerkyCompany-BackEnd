@@ -15,8 +15,11 @@ export class BooksController {
 
   @Get()
   index(): Promise<BookEntity[]> {
+    console.log("got");
     return this.bookServices.findAll();
   }
+  //@get(':username/:workshopID/get')
+  
 
   @Post('create')
   async create(@Body() bookData: BookEntity): Promise<any> {
