@@ -16,10 +16,10 @@ export class AuthService {
 			throw new UnauthorizedException();
 		}
 
-		console.log("User is " + user.username);
-		console.log("User's type is " + typeof user);
-		console.log("Password is " + password);
-		console.log("Input password is " + user.password);
+		// console.log("User is " + user.username);
+		// console.log("User's type is " + typeof user);
+		// console.log("Password is " + password);
+		// console.log("Input password is " + user.password);
 		if(user && user.password === password) {
 			const { password, ...result } = user;
 			return result;
