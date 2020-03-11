@@ -6,9 +6,11 @@ import {
   Delete,
   Body,
   Param,
+  Query,
 } from '@nestjs/common';
 import { Workshop } from './workshop.entity';
 import { WorkshopsService } from './workshops.service';
+
 
 @Controller('workshops')
 export class WorkshopsController {
@@ -18,6 +20,7 @@ export class WorkshopsController {
   index(): Promise<Workshop[]> {
     return this.workshopsServices.findAll();
   }
+
   @Get(':id')
   findone(@Param('id') id): Promise<Workshop> {
     return this.workshopsServices.findByID(id);
@@ -38,7 +41,7 @@ export class WorkshopsController {
 
   @Put(':id/update')
   async update(@Param('id') id, @Body() workshopData: Workshop): Promise<any> {
-    workshopData.id = String(id);
+    workshopData.id = Number(id);
     console.log('Update #' + workshopData.id);
 
 	if(workshopData.cost < 0) workshopData.cost = 0;

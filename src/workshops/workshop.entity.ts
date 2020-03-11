@@ -1,17 +1,21 @@
+
 import { Entity, Column, OneToMany, PrimaryColumn, Timestamp, Check, PrimaryGeneratedColumn } from 'typeorm';
+
 import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
 
 @Entity()
 export class Workshop {
+
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column('timestamp')
+
+  @Column('datetime')
   startTime: Timestamp;
 
-  @Column('timestamp')
+  @Column('datetime')
   endTime: Timestamp;
 
   @Column('int', { nullable: false })
