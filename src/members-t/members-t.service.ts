@@ -13,59 +13,10 @@ export class MembersTService {
   constructor(
     @InjectRepository(MemberTEntity)
     private memberTRepository: Repository<MemberTEntity>,
-  ) {
-  /*
-	this.memberTEntities = [
-		{
-			username: 'john',
-			password: 'changeme',
-			email: 'john@gmail.com',
-			dateOfBirth: new Date(),
-			fullname: 'johhhnnn',
-			gender: 'male',
-			isSuspended: false,
-			participantFlag: true,
-			ownerFlag: false,
-			organization: 'Chula',
-			nationalID: 'id',
-			reviews: null,
-			books: null
-		},
-		{
-			username: 'chris',
-			password: 'secret',
-			email: 'john@gmail.com',
-			dateOfBirth: new Date(),
-			fullname: 'johhhnnn',
-			gender: 'male',
-			isSuspended: false,
-			participantFlag: true,
-			ownerFlag: false,
-			organization: 'Chula',
-			nationalID: 'id',
-			reviews: null,
-			books: null
-		},
-		{
-			username: 'maria',
-			password: 'guess',
-			email: 'john@gmail.com',
-			dateOfBirth: new Date(),
-			fullname: 'johhhnnn',
-			gender: 'male',
-			isSuspended: false,
-			participantFlag: true,
-			ownerFlag: false,
-			organization: 'Chula',
-			nationalID: 'id',
-			reviews: null,
-			books: null
-		}
-	]*/
-  }
+  ) { }
   
 	async findOne(username: string): Promise<MemberTEntity | undefined> {
-		console.log(username + " is trying to login");
+		// console.log(username + " is trying to login");
 		return this.memberTRepository.findOne({ username: username});
 	}
 	
