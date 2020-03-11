@@ -20,8 +20,6 @@ export class WorkshopsController {
   index(): Promise<Workshop[]> {
     return this.workshopsServices.findAll();
   }
-  
-
 
   @Get(':id')
   findone(@Param('id') id): Promise<Workshop> {
