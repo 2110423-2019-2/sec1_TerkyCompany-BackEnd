@@ -9,6 +9,10 @@ export class TagsController {
 	index(): Promise<TagEntity[]> {
 		return this.tagServices.findAll();
 	}
+	@Get('findbyid/:id')
+	findwithid(@Param('id') id): Promise<TagEntity[]> {
+		return this.tagServices.findById(id)
+	}
   
 	@Get('findbytag/:id')
 	findwithtag(@Param('id') id): Promise<TagEntity[]> {
