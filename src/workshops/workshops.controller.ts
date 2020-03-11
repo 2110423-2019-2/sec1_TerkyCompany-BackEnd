@@ -41,7 +41,7 @@ export class WorkshopsController {
 
   @Put(':id/update')
   async update(@Param('id') id, @Body() workshopData: Workshop): Promise<any> {
-    workshopData.id = Number(id);
+    workshopData.id = String(id);
     console.log('Update #' + workshopData.id);
 
 	if(workshopData.cost < 0) workshopData.cost = 0;

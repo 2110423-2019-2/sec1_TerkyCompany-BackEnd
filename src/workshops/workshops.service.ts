@@ -14,6 +14,7 @@ export class WorkshopsService {
   async findAll(): Promise<Workshop[]> {
     return await this.workshopRepository.find();
   }
+
   async findByID(id): Promise<Workshop> {
     return await this.workshopRepository.findOne(id);
   }
@@ -33,9 +34,7 @@ export class WorkshopsService {
 //     });
 //   }
 // 
-  async findByID(id): Promise<Workshop> {
-    return await this.workshopRepository.findOne(id);
-  }
+
 
   async create(workshop: Workshop): Promise<Workshop> {
     return await this.workshopRepository.save(workshop);
