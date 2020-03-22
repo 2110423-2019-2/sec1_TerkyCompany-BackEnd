@@ -9,6 +9,10 @@ import {
 } from '@nestjs/common';
 import { BookEntity } from './book.entity';
 import { BooksService } from './books.service';
+import { Workshop } from '../workshops/workshop.entity';
+import { WorkshopsService } from '../workshops/workshops.service';
+import { CombineLatestOperator } from 'rxjs/internal/observable/combineLatest';
+
 @Controller('books')
 export class BooksController {
   constructor(private bookServices: BooksService) {}
@@ -23,7 +27,9 @@ export class BooksController {
 
   @Post('create')
   async create(@Body() bookData: BookEntity): Promise<any> {
-    return this.bookServices.create(bookData);
+    // ! Doesn't check that reservedSeat must be less than or equal capacity of workshop
+    return  this.bookServices.create(bookData);
+    
   }
 
   @Put(':id/:username/update')

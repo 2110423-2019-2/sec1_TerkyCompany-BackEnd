@@ -1,5 +1,5 @@
 
-import { Entity, Column, OneToMany, PrimaryColumn, Timestamp, Check, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, OneToMany, PrimaryColumn, Timestamp, Check, PrimaryGeneratedColumn, RelationCount } from 'typeorm';
 
 import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
@@ -61,4 +61,10 @@ export class Workshop {
     books => books.workshop,
   )
   books: BookEntity[];
+
+
+
+  @RelationCount("books")  
+  reservedSeat: number;
+
 }

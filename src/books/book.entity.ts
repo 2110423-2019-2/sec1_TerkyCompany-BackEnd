@@ -5,9 +5,12 @@ import {
   Timestamp,
   ManyToOne,
   PrimaryGeneratedColumn,
+  JoinColumn,
+  JoinTable,
 } from 'typeorm';
 import { Workshop } from 'src/workshops/workshop.entity';
 import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { JoinAttribute } from 'typeorm/query-builder/JoinAttribute';
 
 @Entity()
 export class BookEntity {
@@ -17,6 +20,7 @@ export class BookEntity {
     workshop => workshop.books,
 	{ cascade: true, onDelete: "CASCADE", onUpdate: "CASCADE" }
   )
+  @JoinTable()
   workshop: Workshop;
 
   @PrimaryColumn('varchar', { length: 20 })
@@ -35,4 +39,6 @@ export class BookEntity {
 
   @Column('varchar', { length: 256, nullable: true })
   transactionDetail: string;
+
+
 }
