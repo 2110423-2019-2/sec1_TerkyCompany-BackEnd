@@ -21,9 +21,9 @@ export class WorkshopsController {
     return this.workshopsServices.findAll();
   }
 
-  @Get(':id')
-  findone(@Param('id') id): Promise<Workshop> {
-    return this.workshopsServices.findByID(id);
+  @Get('findbyowner/:username')
+  findbyowner(@Param('username') username): Promise<Workshop[]> {
+    return this.workshopsServices.findByOwner(username);
   }
 
   // // Get workshop details

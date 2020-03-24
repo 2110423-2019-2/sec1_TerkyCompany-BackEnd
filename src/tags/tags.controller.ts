@@ -22,7 +22,7 @@ export class TagsController {
 
 	@Post('create')
 	async create(@Body() tagData: TagEntity): Promise<any> {
-		console.log("Hello world");
+		 console.log("Hello world");
 		return this.tagServices.create(tagData);
 	}
 

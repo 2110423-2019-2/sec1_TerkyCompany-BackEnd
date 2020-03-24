@@ -63,7 +63,7 @@ export class Workshop {
   )
   books: BookEntity[];
 
-  @PrimaryColumn('varchar', { length: 20 })
+  @Column('varchar', { length: 20, nullable: false } ) // Nullable should be false?
   @ManyToOne(
     type => MemberTEntity, 
     owner => owner.workshops,{

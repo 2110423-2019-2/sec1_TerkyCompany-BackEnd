@@ -15,8 +15,8 @@ export class WorkshopsService {
     return await this.workshopRepository.find();
   }
 
-  async findByID(id): Promise<Workshop> {
-    return await this.workshopRepository.findOne(id);
+  async findByOwner(username): Promise<Workshop[]> {
+    return await this.workshopRepository.find({ owner: username });
   }
 
 //   async getWorkshop(workshopId: string): Promise<Workshop[]> {

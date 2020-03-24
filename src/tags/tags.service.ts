@@ -70,6 +70,7 @@ export class TagsService {
 	}
 
 	async create(tagEntity: TagEntity): Promise<TagEntity> {
+		console.log(tagEntity);
 		return await this.tagRepository.save(tagEntity);
 	}
 
