@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
+import { Workshop } from 'src/workshops/workshop.entity';
 
 export enum Gender {
 	Male = "male",
@@ -58,4 +59,10 @@ export class MemberTEntity {
   )
   books: BookEntity[];
   
+  @OneToMany(
+    type => Workshop,
+    workshops => workshops.owner,
+  )
+  workshops: Workshop[];
+
 }
