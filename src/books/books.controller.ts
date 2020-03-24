@@ -15,7 +15,7 @@ import { CombineLatestOperator } from 'rxjs/internal/observable/combineLatest';
 
 @Controller('books')
 export class BooksController {
-  constructor(private bookServices: BooksService) {}
+  constructor(private bookServices: BooksService, private workshopsService: WorkshopsService) {}
 
   @Get()
   index(): Promise<BookEntity[]> {
@@ -23,13 +23,23 @@ export class BooksController {
     return this.bookServices.findAll();
   }
   //@get(':username/:workshopID/get')
+
+  @Get('dummy/:id')
+  dummytest(@Param('id') id): Promise<boolean> {
+	  return this.workshopsService.canBook(id);
+  }
   
 
   @Post('create')
   async create(@Body() bookData: BookEntity): Promise<any> {
     // ! Doesn't check that reservedSeat must be less than or equal capacity of workshop
-    return  this.bookServices.create(bookData);
-    
+	var id = bookData.workshop;
+	//console.log(id);
+	var canBook = await this.workshopsService.canBook(String(id));
+	//console.log(canBook);
+	if(canBook)
+		return this.bookServices.create(bookData);
+    else return "Failed to book due to capacity limit";
   }
 
   @Put(':id/:username/update')
