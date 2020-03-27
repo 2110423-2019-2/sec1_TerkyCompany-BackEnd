@@ -49,13 +49,13 @@ export class MembersTController {
   @UseInterceptors(FilesInterceptor('image', 1, {
     fileFilter: imageFileFilter
   }))
-  async setProfoleByUsername(@UploadedFiles() file, @Param('username') username): Promise<any> {
+  async setProfile(@UploadedFiles() file, @Param('username') username): Promise<any> {
     // ! Caution: The current path is /sec1_TerkyCompany_Backend/
     return this.membersTServices.setProfile(username, file[0].filename);
 	}
 
   @Get(':username/profile')
-  async getProfileByUsername(@Param('username') username, @Res() res) {
+  async getProfile(@Param('username') username, @Res() res) {
     var memberTData = await (this.membersTServices.findOne(username));
     console.log(memberTData);
     return res.sendFile(memberTData['profileURL'], { root: './uploads'});

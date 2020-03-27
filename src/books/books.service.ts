@@ -12,6 +12,15 @@ export class BooksService {
     private bookRepository: Repository<BookEntity>,
   ) {}
 
+  async findOne(workshopID, username): Promise<BookEntity> {
+    return await this.bookRepository.find({
+      where: {
+        workshop: workshopID, 
+        username: username
+      }
+    })[0];
+  }
+
   async findAll(): Promise<BookEntity[]> {
     return await this.bookRepository.find();
   }
@@ -25,6 +34,12 @@ export class BooksService {
       { workshop: bookEntity.workshop, memberT: bookEntity.memberT },
       bookEntity,
     );
+  }
+
+  async setTicket(workshopID, username, ticket_path) {
+    return await this.bookRepository.update(
+      { workshop: workshopID, memberT: username }, 
+      { ticketURL: ticket_path })
   }
 
   // ! Not sure about how to delete with 2 parameters

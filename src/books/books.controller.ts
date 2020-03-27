@@ -6,12 +6,15 @@ import {
   Delete,
   Body,
   Param,
+  Res,
+  UploadedFiles,
+  UseInterceptors,
 } from '@nestjs/common';
 import { BookEntity } from './book.entity';
 import { BooksService } from './books.service';
-import { Workshop } from '../workshops/workshop.entity';
 import { WorkshopsService } from '../workshops/workshops.service';
-import { CombineLatestOperator } from 'rxjs/internal/observable/combineLatest';
+import { FilesInterceptor } from '@nestjs/platform-express'
+
 
 @Controller('books')
 export class BooksController {
@@ -22,13 +25,11 @@ export class BooksController {
     console.log("got");
     return this.bookServices.findAll();
   }
-  //@get(':username/:workshopID/get')
 
   @Get('dummy/:id')
   dummytest(@Param('id') id): Promise<boolean> {
 	  return this.workshopsService.canBook(id);
   }
-  
 
   @Post('create')
   async create(@Body() bookData: BookEntity): Promise<any> {
@@ -55,9 +56,35 @@ export class BooksController {
     return this.bookServices.update(bookData);
   }
 
-  // ?
+  @Post(':id/:username/ticket')
+  @UseInterceptors(FilesInterceptor('image', 1, {
+    fileFilter: imageFileFilter
+  }))
+  async setTicket(
+    @Param('id') workshopID,
+    @Param('username') username,
+    @UploadedFiles() file
+  ){
+    return this.bookServices.setTicket(workshopID, username, file[0].filename);
+  }
+
+  @Get(':id/:username/ticket')
+  async getProfile(@Param('workshop') workshopID, @Param('username') username, @Res() res) {
+    var bookData = await (this.bookServices.findOne(workshopID, username));
+    return res.sendFile(bookData['ticketURL'], { root: './uploads'});
+  }
+
+  // ? For refunding
   @Delete(':id/:username/delete')
   async delete(@Param('id') id, @Param('username') username): Promise<any> {
     return this.bookServices.delete(id, username);
   }
+}
+
+// -- filter extension
+export const imageFileFilter = (req, file, callback) => {
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return callback(new Error('Only image files are allowed!'), false);
+  }
+  callback(null, true);
 }

@@ -40,5 +40,8 @@ export class BookEntity {
   @Column('varchar', { length: 256, nullable: true })
   transactionDetail: string;
 
+  @Column('varchar', { length: 100 })
+  ticketURL: string;
+
 
 }
