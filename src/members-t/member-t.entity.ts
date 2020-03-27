@@ -46,7 +46,10 @@ export class MemberTEntity {
 
   @Column('varchar', { length: 13, nullable: false })
   nationalID: string;
-  
+
+  @Column('varchar', { length: 100 })
+  profileURL: string;
+
   @OneToMany(
     type => ReviewEntity,
     reviews => reviews.memberT,

@@ -13,7 +13,8 @@ import {
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { MemberTEntity } from './member-t.entity';
 import { MembersTService } from './members-t.service';
-import { callbackify } from 'util';
+import { file, classBody } from '@babel/types';
+
 @Controller('members-t')
 export class MembersTController {
   constructor(private membersTServices: MembersTService) {}
@@ -40,34 +41,29 @@ export class MembersTController {
 
   @Delete(':username/delete')
   async delete(@Param('username') username): Promise<any> {
-    return this.membersTServices.delete(username);
+    return await this.membersTServices.delete(username);
   }
 
-  // upload picture into local file
-  @Post()
+  // upload picture on local 
+  @Post(':username/profile')
   @UseInterceptors(FilesInterceptor('image', 1, {
     fileFilter: imageFileFilter
   }))
-	async uploadPicture(@UploadedFiles() file) {
-
+  async setProfoleByUsername(@UploadedFiles() file, @Param('username') username): Promise<any> {
     // ! Caution: The current path is /sec1_TerkyCompany_Backend/
-    console.log(process.cwd())
-
-    const response = {
-      originalname: file[0].originalname,
-      filename: file[0].filename,
-    };
-    return response;
+    return this.membersTServices.setProfile(username, file[0].filename);
 	}
 
-	@Get(':imgpath')
-	async seeUploadedFile(@Param('imgpath') image, @Res() res){
-		return res.sendFile(image, { root: './uploads'});
-	}
+  @Get(':username/profile')
+  async getProfileByUsername(@Param('username') username, @Res() res) {
+    var memberTData = await (this.membersTServices.findOne(username));
+    console.log(memberTData);
+    return res.sendFile(memberTData['profileURL'], { root: './uploads'});
+  }
   
 }
 
-// ? filter
+// -- filter extension
 export const imageFileFilter = (req, file, callback) => {
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
     return callback(new Error('Only image files are allowed!'), false);
