@@ -10,7 +10,7 @@ export class AuthService {
 	) {}
 
 	async validateUser(username: string, password: string): Promise<any> {
-		const user = await this.membersTService.findOne(username);
+		const user = await this.membersTService.findByUsername(username);
 
 		if(user == undefined){
 			throw new UnauthorizedException();

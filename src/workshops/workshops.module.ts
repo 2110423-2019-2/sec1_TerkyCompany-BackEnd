@@ -3,9 +3,14 @@ import { WorkshopsService } from './workshops.service';
 import { WorkshopsController } from './workshops.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Workshop } from './workshop.entity';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Workshop])],
+  imports: [TypeOrmModule.forFeature([Workshop]),
+  MulterModule.register({
+    dest: './uploads'
+  })
+  ],
   providers: [WorkshopsService],
   controllers: [WorkshopsController],
 })
