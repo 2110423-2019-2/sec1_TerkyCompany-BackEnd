@@ -14,7 +14,6 @@ export class MembersTService {
     @InjectRepository(MemberTEntity)
     private memberTRepository: Repository<MemberTEntity>,
   ) { }
-  
 
 	async findByUsername(username: string): Promise<MemberTEntity | undefined> {
 		// console.log(username + " is trying to login");

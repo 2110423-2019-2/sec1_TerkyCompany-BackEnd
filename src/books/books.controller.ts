@@ -14,6 +14,7 @@ import { BookEntity } from './book.entity';
 import { BooksService } from './books.service';
 import { WorkshopsService } from '../workshops/workshops.service';
 import { FilesInterceptor } from '@nestjs/platform-express'
+import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 
 @Controller('books')
@@ -25,15 +26,19 @@ export class BooksController {
     console.log("got");
     return this.bookServices.findAll();
   }
-
+  /*
   @Get('dummy/:id')
   dummytest(@Param('id') id): Promise<boolean> {
 	  return this.workshopsService.canBook(id);
   }
+  */
+  @Get('findbyparticipant/:id')
+  findbyparticipant(@Param('id') id): Promise<MemberTEntity[] | any> {
+    return this.bookServices.findByParticipant(id);
+  }
 
   @Post('create')
   async create(@Body() bookData: BookEntity): Promise<any> {
-    // ! Doesn't check that reservedSeat must be less than or equal capacity of workshop
 	var id = bookData.workshop;
 	//console.log(id);
 	var canBook = await this.workshopsService.canBook(String(id));
