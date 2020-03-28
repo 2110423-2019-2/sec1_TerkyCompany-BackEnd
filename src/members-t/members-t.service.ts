@@ -18,8 +18,8 @@ export class MembersTService {
 	async findOne(username: string): Promise<MemberTEntity | undefined> {
 		// console.log(username + " is trying to login");
 		return this.memberTRepository.findOne({ username: username});
-	}
-	
+  }
+  
   async findAll(): Promise<MemberTEntity[]> {
     return await this.memberTRepository.find();
   }
@@ -29,10 +29,15 @@ export class MembersTService {
   }
 
   async update(memberTEntity: MemberTEntity): Promise<UpdateResult> {
+
     return await this.memberTRepository.update(
       memberTEntity.username,
       memberTEntity,
     );
+  }
+
+  async setProfile(username: number, image_path: string){
+    return await this.memberTRepository.update(username, { profileURL: image_path });
   }
 
   async delete(username): Promise<DeleteResult> {

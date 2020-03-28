@@ -12,6 +12,8 @@ import { ReviewsModule } from './reviews/reviews.module';
 import { BooksModule } from './books/books.module';
 import { TagsModule } from './tags/tags.module';
 import { AuthModule } from './auth/auth.module';
+import { MulterModule } from '@nestjs/platform-express';
+
 
 @Module({
   imports: [
@@ -20,8 +22,8 @@ import { AuthModule } from './auth/auth.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'หฟหถๆไเ้ๅกพำ',
-      database: 'dbs3',
+      password: '123456',
+      database: 'db',
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
     }),
