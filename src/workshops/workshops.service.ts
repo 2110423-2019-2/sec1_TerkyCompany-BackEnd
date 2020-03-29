@@ -19,6 +19,10 @@ export class WorkshopsService {
     return await this.workshopRepository.find({ owner: username });
   }
 
+  async findbyid(id): Promise<Workshop[]> {
+    return await this.workshopRepository.find({ id: id });
+  }
+
   async canBook(workshopId: string): Promise<boolean>{
 	var targetWorkshop = await this.workshopRepository.findOne({ id: workshopId });
 	var reservedSeats = targetWorkshop.reservedSeat;
