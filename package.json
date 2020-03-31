@@ -27,6 +27,8 @@
     "@nestjs/passport": "^6.1.1",
     "@nestjs/platform-express": "^6.11.5",
     "@nestjs/typeorm": "^6.3.1",
+    "@types/bcrypt": "^3.0.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "mysql": "^2.18.1",
