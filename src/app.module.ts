@@ -14,6 +14,7 @@ import { TagsModule } from './tags/tags.module';
 import { AuthModule } from './auth/auth.module';
 import { MulterModule } from '@nestjs/platform-express';
 
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -22,8 +23,8 @@ import { MulterModule } from '@nestjs/platform-express';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'annoyingAsFuck',
-      database: 'se_matcher',
+      password: '123456',
+      database: 'db',
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
     }),
@@ -35,6 +36,7 @@ import { MulterModule } from '@nestjs/platform-express';
     BooksModule,
     TagsModule,
     AuthModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

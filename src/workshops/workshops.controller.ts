@@ -28,7 +28,11 @@ export class WorkshopsController {
   findbyowner(@Param('username') username): Promise<Workshop[]> {
     return this.workshopsServices.findByOwner(username);
   }
-
+  
+  @Get('findbyid/:workshopID')
+  findbyid(@Param('workshopID') workshopId): Promise<Workshop[]> {
+    return this.workshopsServices.findbyid(workshopId);
+  }
   // // Get workshop details
   // @Get('detail/:id')
   // getWorkshopDetail(@Param('id') id) {
