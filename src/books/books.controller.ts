@@ -44,7 +44,7 @@ export class BooksController {
 	var canBook = await this.workshopsService.canBook(String(id));
 	//console.log(canBook);
 	if(canBook)
-		return this.bookServices.create(bookData);
+		return await this.bookServices.create(bookData);
     else return "Failed to book due to capacity limit";
   }
 
