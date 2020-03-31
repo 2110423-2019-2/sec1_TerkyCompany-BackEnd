@@ -42,13 +42,13 @@ export class ReviewsController {
   @Put(':id/:workshop_id/:username/update')
   async update(
     @Param('id') id,
-    @Param('workshop') workshop_id,
-    @Param('memberT') username,
+    @Param('workshop_id') workshop_id,
+    @Param('username') username,
     @Body() reviewData: ReviewEntity,
   ): Promise<any> {
     reviewData.id = String(id);
-    // reviewData.workshop = workshop_id;
-    // reviewData.memberT = username;
+    reviewData.workshop = workshop_id;
+    reviewData.memberT = username;
     console.log(reviewData)
     console.log(
       'Update #' +
