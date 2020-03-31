@@ -18,7 +18,7 @@ export class MemberTEntity {
   @PrimaryColumn('varchar', { length: 20 })
   username: string;
 
-  @Column('varchar', { length: 20, nullable: false })
+  @Column('varchar', { length: 150, nullable: false }) // Now is hashed!
   password: string;
 
   @Column('varchar', { length: 30, nullable: false })

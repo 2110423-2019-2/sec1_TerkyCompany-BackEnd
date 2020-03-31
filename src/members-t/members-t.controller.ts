@@ -24,6 +24,11 @@ export class MembersTController {
     return this.membersTServices.findAll();
   }
 
+  @Get('findbyusername/:id')
+  findbyusername(@Param('id') id): Promise<MemberTEntity | undefined>{
+    return this.membersTServices.findByUsername(id);
+  }
+
   @Post('create')
   async create(@Body() memberTData: MemberTEntity): Promise<any> {
     return this.membersTServices.create(memberTData);
