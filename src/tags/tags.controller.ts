@@ -32,4 +32,10 @@ export class TagsController {
 	async delete(@Param('id') id, @Param('tag') tag): Promise<any> {
 		return this.tagServices.delete(id, tag);
 	}
+
+	@Get('deletebyid/:id')
+	deletebyid(@Param('id') id): Promise<any> {
+		return this.tagServices.deletebyid(id)
+	}
+	
 }

@@ -14,6 +14,16 @@ export class ReviewsService {
   async findAll(): Promise<ReviewEntity[]> {
     return await this.reviewRepository.find();
   }
+  async findByWorkshop(id): Promise<ReviewEntity[]> {
+    return await this.reviewRepository.find({workshop: id,});
+  }
+  async findByUser(username): Promise<ReviewEntity[]> {
+    return await this.reviewRepository.find({memberT: username,});
+  }
+  async findByComment(id,username): Promise<ReviewEntity[]> {
+    return await this.reviewRepository.find({memberT: username,workshop: id,});
+  }
+  
 
   async create(reviewEntity: ReviewEntity): Promise<ReviewEntity> {
     return await this.reviewRepository.save(reviewEntity);

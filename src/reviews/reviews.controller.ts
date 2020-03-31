@@ -18,7 +18,18 @@ export class ReviewsController {
   index(): Promise<ReviewEntity[]> {
     return this.reviewServices.findAll();
   }
-
+  @Get('findbyworkshop/:id')
+	findByWorkshop(@Param('id') id): Promise<ReviewEntity[]> {
+		return this.reviewServices.findByWorkshop(id)
+  }
+  @Get('findbyuser/:username')
+	findByUser(@Param('username') username): Promise<ReviewEntity[]> {
+		return this.reviewServices.findByUser(username)
+  }
+  @Get('findcomment/:id/:username')
+	findComment(@Param('id') id,@Param('username') username): Promise<ReviewEntity[]> {
+		return this.reviewServices.findByComment(id,username)
+	}
   @Post('create')
   async create(@Body() reviewData: ReviewEntity): Promise<any> {
 
@@ -38,6 +49,7 @@ export class ReviewsController {
     reviewData.id = String(id);
     reviewData.workshop = workshop_id;
     reviewData.memberT = username;
+    console.log(reviewData)
     console.log(
       'Update #' +
         reviewData.id +
