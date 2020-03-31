@@ -23,7 +23,7 @@ export class MembersTService {
     var user = await this.memberTRepository.find({
       username: username
     });
-    console.log(user);
+    // console.log(user);
     return user[0];
   }
 
@@ -31,29 +31,18 @@ export class MembersTService {
     return await this.memberTRepository.find();
   }
 
-  async create(memberTEntity: MemberTEntity): Promise<MemberTEntity> { // Need to fix the returning value
+  async create(memberTEntity: MemberTEntity): Promise<MemberTEntity> { 
     // BCRYPT
-    /*
-    var hash = AuthService.hashPassword('myPassword', 12, async (err, hash) => {
-      // store the new hash in the database etc
-      console.log("HASHING error: " + err);
-      console.log(hash);
-      console.log(memberTEntity.username + "'s unhashed password: [" + memberTEntity.password + "]");
-      console.log("Hashed password: " + hash);
-      AuthService.compare(memberTEntity.password, hash, (err, match) => {
-        console.log("Password match: " + match); // WHY DOES IT NOT MATCH EVEN RIGHT AFTER HASHING
-      });
-      memberTEntity.password = hash;
-
-      // console.log(memberTEntity);
-      await this.memberTRepository.save(memberTEntity);
-
-    });
-    
+    var hash = AuthService.hashPasswordSync(memberTEntity.password, 12);
     // console.log(hash);
-    return await this.memberTRepository.findOne({ username: memberTEntity.username });
-    */
-   return await this.memberTRepository.save(memberTEntity);
+    // console.log(memberTEntity.username + "'s unhashed password: [" + memberTEntity.password + "]");
+    // console.log("Hashed password: " + hash);
+    
+    var match = AuthService.compareSync(memberTEntity.password, hash);
+    
+    memberTEntity.password = hash;
+    // console.log("Match:" + match);
+    return await this.memberTRepository.save(memberTEntity);
   }
 
   async update(memberTEntity: MemberTEntity): Promise<UpdateResult> {
