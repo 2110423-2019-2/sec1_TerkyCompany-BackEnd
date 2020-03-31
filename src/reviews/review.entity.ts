@@ -5,6 +5,7 @@ import {
   Timestamp,
   ManyToOne,
   CreateDateColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Workshop } from 'src/workshops/workshop.entity';
 import { WorkshopsService } from 'src/workshops/workshops.service';
@@ -13,7 +14,7 @@ import { MemberTEntity } from 'src/members-t/member-t.entity';
 @Entity()
 export class ReviewEntity {
 
-  @PrimaryColumn('varchar', { length: 20 })
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column('decimal', { precision: 2, scale: 1, nullable: false })
@@ -25,7 +26,7 @@ export class ReviewEntity {
   @Column('text', { nullable: false })
   comment: string;
 
-  @PrimaryColumn('varchar', { length: 20 })
+  @PrimaryColumn('varchar', { length: 36 })
   @ManyToOne(
     type => Workshop,
     workshop => workshop.reviews,

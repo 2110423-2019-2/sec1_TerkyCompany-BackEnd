@@ -1,12 +1,17 @@
-import { Entity, Column, OneToMany, PrimaryColumn, Timestamp, Check, PrimaryGeneratedColumn  } from 'typeorm';
+
+import { Entity, Column, OneToMany, PrimaryColumn, Timestamp, Check, PrimaryGeneratedColumn, RelationCount, ManyToOne } from 'typeorm';
+
 import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
+import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { cloneWithoutLoc } from '@babel/types';
 
 @Entity()
 export class Workshop {
-  @PrimaryGeneratedColumn()
-  id: number;
+
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column('datetime')
   startTime: Timestamp;
@@ -58,4 +63,19 @@ export class Workshop {
     books => books.workshop,
   )
   books: BookEntity[];
+
+  @Column('varchar', { length: 20, nullable: false } ) // Nullable should be false?
+  @ManyToOne(
+    type => MemberTEntity, 
+    owner => owner.workshops,{
+      cascade: true,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    }
+  )
+  owner: MemberTEntity;
+
+  @RelationCount("books")  
+  reservedSeat: number;
+
 }

@@ -4,7 +4,7 @@ import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Entity()
 export class TagEntity {
-  @PrimaryColumn('varchar', { length: 20 })
+  @PrimaryColumn('varchar', { length: 36 })
   @ManyToOne(
     type => Workshop,
     workshop => workshop.tags,

@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+# upload picture
+/uploads
+
 # Logs
 logs
 *.log
@@ -25,6 +28,7 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+.vs/*
 
 # IDE - VSCode
 .vscode/*

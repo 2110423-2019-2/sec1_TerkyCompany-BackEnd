@@ -1,20 +1,30 @@
-import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { MemberTEntity } from 'src/members-t/member-t.entity';
+
+export enum Subject {
+	Website = "website",
+	Payment = "payment",
+	Member = "member",
+	Workshop = "workshop",
+	Other = "other"
+}
 
 @Entity()
 export class FeedbackEntity {
-  @PrimaryColumn('varchar', { length: 20 })
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
+  @Column('enum', { enum: Subject, nullable: false })
+  subject: string;
+
   @Column('text', { nullable: false })
-  comment: string;
+  description: string;
 
   @PrimaryColumn('varchar', { length: 20 })
-  @OneToOne(type => MemberTEntity, {
-    cascade: true,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  @JoinColumn()
+  @ManyToOne(
+    type => MemberTEntity,
+    memberT => memberT.reviews,
+	{ cascade: true, onDelete: "CASCADE", onUpdate: "CASCADE" }
+  )
   memberT: MemberTEntity;
 }

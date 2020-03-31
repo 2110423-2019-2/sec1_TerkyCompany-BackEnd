@@ -6,9 +6,14 @@ import {
   Delete,
   Body,
   Param,
+  Query,
+  UseInterceptors,
+  UploadedFiles,
+  Res
 } from '@nestjs/common';
 import { Workshop } from './workshop.entity';
 import { WorkshopsService } from './workshops.service';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('workshops')
 export class WorkshopsController {
@@ -19,10 +24,18 @@ export class WorkshopsController {
     return this.workshopsServices.findAll();
   }
 
-  @Get(':id')
-  findone(@Param('id') id): Promise<Workshop> {
-    return this.workshopsServices.findByID(id);
+  @Get('findbyowner/:username')
+  findbyowner(@Param('username') username): Promise<Workshop[]> {
+    return this.workshopsServices.findByOwner(username);
   }
+
+  // // Get workshop details
+  // @Get('detail/:id')
+  // getWorkshopDetail(@Param('id') id) {
+  //   var workshopID = this.workshopsServices.findByID(id);
+  //    workshopID.
+  // }
+
 
   @Post('create')
   async create(@Body() workshopData: Workshop): Promise<any> {
@@ -39,7 +52,7 @@ export class WorkshopsController {
 
   @Put(':id/update')
   async update(@Param('id') id, @Body() workshopData: Workshop): Promise<any> {
-    workshopData.id = Number(id);
+    workshopData.id = String(id);
     console.log('Update #' + workshopData.id);
 
 	if(workshopData.cost < 0) workshopData.cost = 0;
@@ -55,4 +68,33 @@ export class WorkshopsController {
   async delete(@Param('id') id): Promise<any> {
     return this.workshopsServices.delete(id);
   }
+
+
+  // upload picture on local 
+  @Post(':workshopID/picture')
+  @UseInterceptors(FilesInterceptor('image', 1, {
+    fileFilter: imageFileFilter,
+  }))
+  async setProfile(@UploadedFiles() file, @Param('workshopID') workshopID): Promise<any> {
+    // ! Caution: The current path is /sec1_TerkyCompany_Backend/
+    var workshopData = this.workshopsServices.findByID(workshopID);
+
+    if (workshopData['id'] == null)
+      return "Please send a profile via existing username"
+    return this.workshopsServices.setPictureURL(workshopID, file[0].filename);
+	}
+
+  @Get(':workshopID/picture')
+  async getProfile(@Param('workshopID') workshopID, @Res() res) {
+    var workshopData = (this.workshopsServices.findByID(workshopID));
+    return res.sendFile(workshopData['pictureURL'], { root: './uploads'});
+  }
+}
+
+// -- filter extension
+export const imageFileFilter = (req, file, callback) => {
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return callback(new Error('Only image files are allowed!'), false);
+  }
+  callback(null, true);
 }
