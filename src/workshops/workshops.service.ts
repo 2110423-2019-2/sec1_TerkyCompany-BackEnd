@@ -16,11 +16,7 @@ export class WorkshopsService {
   }
 
   async findByID(workshopID: string): Promise<Workshop> {
-    return await this.workshopRepository.find({
-      where: {
-        id: workshopID
-      }
-    })[0];
+    return await this.workshopRepository.findOne({id:workshopID});
   }
 
   async setPictureURL(workshopID: Workshop, image_path: string): Promise<UpdateResult> {
