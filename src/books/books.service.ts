@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BookEntity } from './book.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
 import { Workshop } from 'src/workshops/workshop.entity';
+import { MemberTEntity } from 'src/members-t/member-t.entity';
 
 @Injectable()
 export class BooksService {
@@ -19,6 +20,21 @@ export class BooksService {
         username: username
       }
     })[0];
+  }
+
+  async findByParticipant(username): Promise<MemberTEntity[] | any> {
+    var bookList = await this.bookRepository.find();
+    var ret = [];
+    for(var i = 0; i < bookList.length; ++i){
+      var e = bookList[i];
+      // console.log(e.memberT);
+      // console.log(e.memberT.username);
+      if(e.memberT == username){
+        // console.log("FOUND");
+        ret.push(e);
+      }
+    }
+    return ret;
   }
 
   async findAll(): Promise<BookEntity[]> {

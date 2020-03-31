@@ -5,6 +5,7 @@ import { TagEntity } from 'src/tags/tag.entity';
 import { ReviewEntity } from 'src/reviews/review.entity';
 import { BookEntity } from 'src/books/book.entity';
 import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { cloneWithoutLoc } from '@babel/types';
 
 @Entity()
 export class Workshop {

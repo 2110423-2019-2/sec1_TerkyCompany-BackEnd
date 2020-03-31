@@ -14,10 +14,14 @@ export class MembersTService {
     @InjectRepository(MemberTEntity)
     private memberTRepository: Repository<MemberTEntity>,
   ) { }
-  
-	async findOne(username: string): Promise<MemberTEntity | undefined> {
+
+	async findByUsername(username: string): Promise<MemberTEntity | undefined> {
 		// console.log(username + " is trying to login");
-		return this.memberTRepository.findOne({ username: username});
+		return this.memberTRepository.find({
+      where: {
+        username: username
+      }
+    })[0];
   }
   
   async findAll(): Promise<MemberTEntity[]> {
