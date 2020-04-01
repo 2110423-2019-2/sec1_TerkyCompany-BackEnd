@@ -11,6 +11,8 @@ export class BooksService {
   constructor(
     @InjectRepository(BookEntity)
     private bookRepository: Repository<BookEntity>,
+    @InjectRepository(Workshop)
+    private workshopRepository: Repository<Workshop>,
   ) {}
 
   async findOne(workshopID, username): Promise<BookEntity> {
@@ -48,7 +50,15 @@ export class BooksService {
         ret.push(e);
       }
     }
-    return ret;
+    console.log(ret)
+    var ret2= [];
+    for(var i = 0; i < ret.length; i++){
+        var temp = ret[i].workshop;
+        var temp2 = await this.workshopRepository.findOne(temp);
+        console.log(temp2);
+        ret2.push(temp2);
+    }
+    return ret2;
   }
 
   async findAll(): Promise<BookEntity[]> {
