@@ -18,16 +18,16 @@ export class ReviewsController {
   index(): Promise<ReviewEntity[]> {
     return this.reviewServices.findAll();
   }
-  @Get('findbyworkshop/:id')
-	findByWorkshop(@Param('id') id): Promise<ReviewEntity[]> {
+  @Get('findbyworkshop/:workshop_id')
+	findByWorkshop(@Param('workshop_id') id): Promise<ReviewEntity[]> {
 		return this.reviewServices.findByWorkshop(id)
   }
   @Get('findbyuser/:username')
 	findByUser(@Param('username') username): Promise<ReviewEntity[]> {
 		return this.reviewServices.findByUser(username)
   }
-  @Get('findcomment/:id/:username')
-	findComment(@Param('id') id,@Param('username') username): Promise<ReviewEntity[]> {
+  @Get('findcomment/:workshop_id/:username')
+	findComment(@Param('workshop_id') id,@Param('username') username): Promise<ReviewEntity[]> {
 		return this.reviewServices.findByComment(id,username)
 	}
   @Post('create')
@@ -39,21 +39,17 @@ export class ReviewsController {
     return this.reviewServices.create(reviewData);
   }
 
-  @Put(':id/:workshop_id/:username/update')
+  @Put(':workshop_id/:username/update')
   async update(
-    @Param('id') id,
     @Param('workshop_id') workshop_id,
     @Param('username') username,
     @Body() reviewData: ReviewEntity,
   ): Promise<any> {
-    reviewData.id = String(id);
     reviewData.workshop = workshop_id;
     reviewData.memberT = username;
     console.log(reviewData)
     console.log(
       'Update #' +
-        reviewData.id +
-        ' : ' +
         reviewData.workshop +
         ' : ' +
         reviewData.memberT,
@@ -65,12 +61,11 @@ export class ReviewsController {
     return this.reviewServices.update(reviewData);
   }
 
-  @Delete(':id/:workshop_id/:username/delete')
+  @Delete(':workshop_id/:username/delete')
   async delete(
-    @Param('id') id,
     @Param('workshop_id') workshop_id,
     @Param('username') username,
   ): Promise<any> {
-    return this.reviewServices.delete(id, workshop_id, username);
+    return this.reviewServices.delete(workshop_id, username);
   }
 }
