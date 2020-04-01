@@ -15,7 +15,8 @@ import { BooksService } from './books.service';
 import { WorkshopsService } from '../workshops/workshops.service';
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { MemberTEntity } from 'src/members-t/member-t.entity';
-
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller('books')
 export class BooksController {
@@ -42,16 +43,38 @@ export class BooksController {
     return this.bookServices.findByParticipant(id);
   }
 
+  // @Post('create')
+  // async create(@Body() bookData: BookEntity): Promise<any> {
+	// var id = bookData.workshop;
+	// //console.log(id);
+	// var canBook = await this.workshopsService.canBook(String(id));
+	// //console.log(canBook);
+	// if(canBook)
+	// 	return await this.bookServices.create(bookData);
+  //   else return "Failed to book due to capacity limit";
+  // }
+
   @Post('create')
-  async create(@Body() bookData: BookEntity): Promise<any> {
-	var id = bookData.workshop;
-	//console.log(id);
-	var canBook = await this.workshopsService.canBook(String(id));
-	//console.log(canBook);
-	if(canBook)
-		return await this.bookServices.create(bookData);
+  @UseInterceptors(FilesInterceptor('image', 1, {
+    fileFilter: imageFileFilter,
+    storage: diskStorage({
+      destination: './uploads/ticket_picture',
+      filename: editFileName
+    })
+  }))
+  async create(@Body() Request, @UploadedFiles() file): Promise<any> {
+  
+    var bookData = JSON.parse(Request['request']);
+    
+    var id = bookData.workshop;
+    //console.log(id);
+    var canBook = await this.workshopsService.canBook(String(id));
+    //console.log(canBook);
+    if(canBook)
+      return await this.bookServices.create(bookData);
     else return "Failed to book due to capacity limit";
   }
+
 
   @Put(':id/:username/update')
   async update(
@@ -81,7 +104,7 @@ export class BooksController {
   @Get(':id/:username/ticket')
   async getProfile(@Param('workshop') workshopID, @Param('username') username, @Res() res) {
     var bookData = await (this.bookServices.findOne(workshopID, username));
-    return res.sendFile(bookData['ticketURL'], { root: './uploads'});
+    return res.sendFile(bookData['ticketURL'], { root: './uploads/ticket_picture'});
   }
 
   // ? For refunding
@@ -98,3 +121,13 @@ export const imageFileFilter = (req, file, callback) => {
   }
   callback(null, true);
 }
+
+export const editFileName = (req, file, callback) => {
+  const name = file.originalname.split('.')[0];
+  const fileExtName = extname(file.originalname);
+  const randomName = Array(4)
+    .fill(null)
+    .map(() => Math.round(Math.random() * 16).toString(16))
+    .join('');
+  callback(null, `${name}-${randomName}${fileExtName}`);
+};
