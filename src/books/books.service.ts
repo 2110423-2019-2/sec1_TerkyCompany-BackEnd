@@ -14,12 +14,26 @@ export class BooksService {
   ) {}
 
   async findOne(workshopID, username): Promise<BookEntity> {
+    /*
     return await this.bookRepository.find({
       where: {
         workshop: workshopID, 
         username: username
       }
-    })[0];
+    })[0];*/
+    var bookList = await this.bookRepository.find();
+    var ret;
+    for(var i = 0; i < bookList.length; ++i){
+      var e = bookList[i];
+      // console.log(e.memberT);
+      // console.log(e.memberT.username);
+      if(e.memberT == username && e.workshop == workshopID){
+        // console.log("FOUND");
+        ret = e;
+        break;
+      }
+    }
+    return ret;
   }
 
   async findByParticipant(username): Promise<MemberTEntity[] | any> {
