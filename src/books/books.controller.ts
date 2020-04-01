@@ -99,7 +99,7 @@ export class BooksController {
   @Get(':id/:username/ticket')
   async getProfile(@Param('workshop') workshopID, @Param('username') username, @Res() res) {
     var bookData = await (this.bookServices.findOne(workshopID, username));
-    return res.sendFile(bookData['ticketURL'], { root: './uploads'});
+    return res.sendFile(bookData['ticketURL'], { root: './uploads/ticket_picture'});
   }
 
   // ? For refunding

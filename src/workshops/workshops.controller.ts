@@ -107,7 +107,7 @@ export class WorkshopsController {
   async getProfile(@Param('workshopID') workshopID, @Res() res) {
     var workshopData = await (this.workshopsServices.findByID(workshopID));
     console.log(workshopData)
-    return res.sendFile(workshopData['pictureURL'], { root: './uploads'});
+    return res.sendFile(workshopData['pictureURL'], { root: './uploads/workshop_picture'});
   }
 }
 
