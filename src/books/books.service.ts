@@ -11,15 +11,31 @@ export class BooksService {
   constructor(
     @InjectRepository(BookEntity)
     private bookRepository: Repository<BookEntity>,
+    @InjectRepository(Workshop)
+    private workshopRepository: Repository<Workshop>,
   ) {}
 
   async findOne(workshopID, username): Promise<BookEntity> {
+    /*
     return await this.bookRepository.find({
       where: {
         workshop: workshopID, 
         username: username
       }
-    })[0];
+    })[0];*/
+    var bookList = await this.bookRepository.find();
+    var ret;
+    for(var i = 0; i < bookList.length; ++i){
+      var e = bookList[i];
+      // console.log(e.memberT);
+      // console.log(e.memberT.username);
+      if(e.memberT == username && e.workshop == workshopID){
+        // console.log("FOUND");
+        ret = e;
+        break;
+      }
+    }
+    return ret;
   }
 
   async findByParticipant(username): Promise<MemberTEntity[] | any> {
@@ -34,7 +50,15 @@ export class BooksService {
         ret.push(e);
       }
     }
-    return ret;
+    console.log(ret)
+    var ret2= [];
+    for(var i = 0; i < ret.length; i++){
+        var temp = ret[i].workshop;
+        var temp2 = await this.workshopRepository.findOne(temp);
+        console.log(temp2);
+        ret2.push(temp2);
+    }
+    return ret2;
   }
 
   async findAll(): Promise<BookEntity[]> {

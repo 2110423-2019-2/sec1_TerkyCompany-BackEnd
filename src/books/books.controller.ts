@@ -32,6 +32,11 @@ export class BooksController {
 	  return this.workshopsService.canBook(id);
   }
   */
+  @Get('findone/:id/:username')
+  findone(@Param('id') id, @Param('username') username): Promise<BookEntity>{
+    return this.bookServices.findOne(id, username);
+  }
+
   @Get('findbyparticipant/:id')
   findbyparticipant(@Param('id') id): Promise<MemberTEntity[] | any> {
     return this.bookServices.findByParticipant(id);
@@ -44,7 +49,7 @@ export class BooksController {
 	var canBook = await this.workshopsService.canBook(String(id));
 	//console.log(canBook);
 	if(canBook)
-		return this.bookServices.create(bookData);
+		return await this.bookServices.create(bookData);
     else return "Failed to book due to capacity limit";
   }
 

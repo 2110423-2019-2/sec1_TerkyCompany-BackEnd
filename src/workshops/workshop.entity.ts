@@ -75,6 +75,7 @@ export class Workshop {
   )
   owner: MemberTEntity;
 
+  @Column({default:0})
   @RelationCount("books")  
   reservedSeat: number;
 

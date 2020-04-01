@@ -14,9 +14,6 @@ import { MemberTEntity } from 'src/members-t/member-t.entity';
 @Entity()
 export class ReviewEntity {
 
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
-
   @Column('decimal', { precision: 2, scale: 1, nullable: false })
   rating: number;
 
