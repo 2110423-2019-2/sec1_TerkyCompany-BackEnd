@@ -23,7 +23,7 @@ import { PaymentModule } from './payment/payment.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'immortal0',
+      password: '123456',
       database: 'db',
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
