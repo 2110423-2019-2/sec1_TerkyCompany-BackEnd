@@ -26,6 +26,7 @@
     "@nestjs/jwt": "^6.1.1",
     "@nestjs/passport": "^6.1.1",
     "@nestjs/platform-express": "^6.11.5",
+    "@nestjs/swagger": "^4.5.1",
     "@nestjs/typeorm": "^6.3.1",
     "@types/bcrypt": "^3.0.0",
     "@types/bcryptjs": "^2.4.2",
@@ -43,6 +44,7 @@
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.4",
     "sqlite3": "^4.1.1",
+    "swagger-ui-express": "^4.1.4",
     "typeorm": "^0.2.22"
   },
   "devDependencies": {
