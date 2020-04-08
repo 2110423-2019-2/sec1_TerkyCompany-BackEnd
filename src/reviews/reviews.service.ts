@@ -14,6 +14,16 @@ export class ReviewsService {
   async findAll(): Promise<ReviewEntity[]> {
     return await this.reviewRepository.find();
   }
+  async findByWorkshop(workshop_id): Promise<ReviewEntity[]> {
+    return await this.reviewRepository.find({workshop: workshop_id,});
+  }
+  async findByUser(username): Promise<ReviewEntity[]> {
+    return await this.reviewRepository.find({memberT: username,});
+  }
+  async findByComment(workshop_id,username): Promise<ReviewEntity[]> {
+    return await this.reviewRepository.find({memberT: username,workshop: workshop_id,});
+  }
+  
 
   async create(reviewEntity: ReviewEntity): Promise<ReviewEntity> {
     return await this.reviewRepository.save(reviewEntity);
@@ -22,7 +32,6 @@ export class ReviewsService {
   async update(reviewEntity: ReviewEntity): Promise<UpdateResult> {
     return await this.reviewRepository.update(
       {
-        id: reviewEntity.id,
         workshop: reviewEntity.workshop,
         memberT: reviewEntity.memberT,
       },
@@ -30,9 +39,8 @@ export class ReviewsService {
     );
   }
 
-  async delete(id, workshop_id, username): Promise<DeleteResult> {
+  async delete(workshop_id, username): Promise<DeleteResult> {
     return await this.reviewRepository.delete({
-      id: id,
       workshop: workshop_id,
       memberT: username,
     });

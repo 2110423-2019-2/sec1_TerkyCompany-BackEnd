@@ -15,8 +15,29 @@ export class WorkshopsService {
     return await this.workshopRepository.find();
   }
 
-  async findByID(id): Promise<Workshop> {
-    return await this.workshopRepository.findOne(id);
+  async findByID(workshopID: string): Promise<Workshop> {
+    return await this.workshopRepository.findOne({id:workshopID});
+  }
+
+  async setPictureURL(workshopID: Workshop, image_path: string): Promise<UpdateResult> {
+    return await this.workshopRepository.update(workshopID, { pictureURL: image_path});
+  }
+
+  async findByOwner(username): Promise<Workshop[]> {
+    return await this.workshopRepository.find({ owner: username });
+  }
+
+  async findbyid(id): Promise<Workshop[]> {
+    return await this.workshopRepository.find({ id: id });
+  }
+
+  async canBook(workshopId: string): Promise<boolean>{
+	var targetWorkshop = await this.workshopRepository.findOne({ id: workshopId });
+	var reservedSeats = targetWorkshop.reservedSeat;
+	var capacity = targetWorkshop.capacity;
+	//console.log(reservedSeats);
+	//console.log(capacity);
+	return reservedSeats < capacity;
   }
 
 //   async getWorkshop(workshopId: string): Promise<Workshop[]> {

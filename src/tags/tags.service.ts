@@ -21,7 +21,7 @@ export class TagsService {
 			workshop: id,
 		});
 	}
-
+	
 	async findByTag(id): Promise<TagEntity[] | any> {
 		// console.log("Service id = " + id);
 
@@ -75,5 +75,9 @@ export class TagsService {
 
 	async delete(id, tag): Promise<DeleteResult> {
 		return await this.tagRepository.delete({ workshop: id, tag: tag });
+	}
+
+	async deletebyid(id): Promise<DeleteResult> {
+		return await this.tagRepository.delete({ workshop: id});
 	}
 }

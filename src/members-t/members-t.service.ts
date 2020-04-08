@@ -3,36 +3,58 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MemberTEntity } from './member-t.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
+import { AuthService } from 'src/auth/auth.service';
+import { callbackify } from 'util';
 
 @Injectable()
 export class MembersTService {
 
-	private readonly memberTEntities: MemberTEntity[];
+  private readonly memberTEntities: MemberTEntity[];
 
 
   constructor(
     @InjectRepository(MemberTEntity)
     private memberTRepository: Repository<MemberTEntity>,
   ) { }
-  
-	async findOne(username: string): Promise<MemberTEntity | undefined> {
-		// console.log(username + " is trying to login");
-		return this.memberTRepository.findOne({ username: username});
-	}
-	
+
+  async findByUsername(username: string): Promise<MemberTEntity | undefined> {
+    // console.log(username + " is trying to login");
+    // Don't forget await! Or you'll get Promise<Pending> as a result!
+    var user = await this.memberTRepository.find({
+      username: username
+    });
+    // console.log(user);
+    return user[0];
+  }
+
   async findAll(): Promise<MemberTEntity[]> {
     return await this.memberTRepository.find();
   }
 
-  async create(memberTEntity: MemberTEntity): Promise<MemberTEntity> {
+  async create(memberTEntity: MemberTEntity): Promise<MemberTEntity> { 
+    // BCRYPT
+    var hash = AuthService.hashPasswordSync(memberTEntity.password, 12);
+    // console.log(hash);
+    // console.log(memberTEntity.username + "'s unhashed password: [" + memberTEntity.password + "]");
+    // console.log("Hashed password: " + hash);
+    
+    var match = AuthService.compareSync(memberTEntity.password, hash);
+    
+    memberTEntity.password = hash;
+    // console.log("Match:" + match);
     return await this.memberTRepository.save(memberTEntity);
   }
 
   async update(memberTEntity: MemberTEntity): Promise<UpdateResult> {
+
     return await this.memberTRepository.update(
       memberTEntity.username,
       memberTEntity,
     );
+  }
+
+  async setProfile(username: number, image_path: string) {
+    return await this.memberTRepository.update(username, { profileURL: image_path });
   }
 
   async delete(username): Promise<DeleteResult> {
