@@ -13,6 +13,7 @@ export class AuthService {
 	) {}
 
 	async validateUser(username: string, password: string): Promise<any> {
+		console.log("validateUser: AuthService");
 		const user = await this.membersTService.findByUsername(username);
 
 		if(user == undefined){
@@ -50,6 +51,7 @@ export class AuthService {
 
 	// HASH SYNCHRONOUS
 	public static hashPasswordSync(password, rounds){
+		console.log("hashPasswordSync: AuthService");
 		return  bcrypt.hashSync(password, rounds);
 	}
 
@@ -73,6 +75,7 @@ export class AuthService {
 
 	// COMPARE SYNCHRONOUS
 	public static compareSync(password, dbHash){
+		console.log("compareSync: AuthService");
 		if(bcrypt.compareSync(password, dbHash)) {
 			// Passwords match
 			// console.log("Matched!")
@@ -85,6 +88,7 @@ export class AuthService {
 	}
 
 	async login(user: any){
+		console.log("login: AuthService");
 		const payload = {
 			username: user.username, 
 			userType: user.userType,
