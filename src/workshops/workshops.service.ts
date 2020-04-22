@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Workshop } from './workshop.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
+
+@EntityRepository(Workshop)
+export class WorkshopRepository extends Repository<Workshop> {}
 
 @Injectable()
 export class WorkshopsService {
   constructor(
     @InjectRepository(Workshop)
-    private workshopRepository: Repository<Workshop>,
+    private workshopRepository: WorkshopRepository,
   ) {}
 
   async findAll(): Promise<Workshop[]> {

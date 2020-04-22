@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ReviewEntity } from './review.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
+
+@EntityRepository(ReviewEntity)
+export class ReviewEntityRepository extends Repository<ReviewEntity> {}
 
 @Injectable()
 export class ReviewsService {
   constructor(
     @InjectRepository(ReviewEntity)
-    private reviewRepository: Repository<ReviewEntity>,
+    private reviewRepository: ReviewEntityRepository,
   ) {}
 
   async findAll(): Promise<ReviewEntity[]> {

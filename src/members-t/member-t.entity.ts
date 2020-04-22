@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm';
-import { ReviewEntity } from 'src/reviews/review.entity';
-import { BookEntity } from 'src/books/book.entity';
-import { Workshop } from 'src/workshops/workshop.entity';
+import { ReviewEntity } from '../reviews/review.entity';
+import { BookEntity } from '../books/book.entity';
+import { Workshop } from '../workshops/workshop.entity';
 
 export enum Gender {
 	Male = "male",

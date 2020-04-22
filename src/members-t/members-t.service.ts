@@ -1,20 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MemberTEntity } from './member-t.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { callbackify } from 'util';
+
+@EntityRepository(MemberTEntity)
+export class MemberTEntityRepository extends Repository<MemberTEntity> {
+
+}
 
 @Injectable()
 export class MembersTService {
-
-  private readonly memberTEntities: MemberTEntity[];
-
-
   constructor(
     @InjectRepository(MemberTEntity)
-    private memberTRepository: Repository<MemberTEntity>,
+    private memberTRepository: MemberTEntityRepository,
   ) { }
 
   async findByUsername(username: string): Promise<MemberTEntity | undefined> {

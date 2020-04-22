@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FeedbackEntity } from './feedback.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
+
+@EntityRepository(FeedbackEntity)
+export class FeedbackEntityRepository extends Repository<FeedbackEntity> {}
 
 @Injectable()
 export class FeedbacksService {
   constructor(
     @InjectRepository(FeedbackEntity)
-    private feedbackRepository: Repository<FeedbackEntity>,
+    private feedbackRepository: FeedbackEntityRepository,
   ) {}
 
   async findAll(): Promise<FeedbackEntity[]> {
