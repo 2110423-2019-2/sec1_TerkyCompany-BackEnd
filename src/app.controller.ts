@@ -4,7 +4,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { PassportModule } from '@nestjs/passport';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
-import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { FilesInterceptor } from '@nestjs/platform-express';

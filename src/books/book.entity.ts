@@ -8,8 +8,8 @@ import {
   JoinColumn,
   JoinTable,
 } from 'typeorm';
-import { Workshop } from 'src/workshops/workshop.entity';
-import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { Workshop } from '../workshops/workshop.entity';
+import { MemberTEntity } from '../members-t/member-t.entity';
 import { JoinAttribute } from 'typeorm/query-builder/JoinAttribute';
 
 @Entity()

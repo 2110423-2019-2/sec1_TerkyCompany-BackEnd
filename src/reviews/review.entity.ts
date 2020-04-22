@@ -7,9 +7,9 @@ import {
   CreateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Workshop } from 'src/workshops/workshop.entity';
-import { WorkshopsService } from 'src/workshops/workshops.service';
-import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { Workshop } from '../workshops/workshop.entity';
+import { WorkshopsService } from '../workshops/workshops.service';
+import { MemberTEntity } from '../members-t/member-t.entity';
 
 @Entity()
 export class ReviewEntity {

@@ -1,10 +1,10 @@
 
 import { Entity, Column, OneToMany, PrimaryColumn, Timestamp, Check, PrimaryGeneratedColumn, RelationCount, ManyToOne } from 'typeorm';
 
-import { TagEntity } from 'src/tags/tag.entity';
-import { ReviewEntity } from 'src/reviews/review.entity';
-import { BookEntity } from 'src/books/book.entity';
-import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { TagEntity } from '../tags/tag.entity';
+import { ReviewEntity } from '../reviews/review.entity';
+import { BookEntity } from '../books/book.entity';
+import { MemberTEntity } from '../members-t/member-t.entity';
 import { cloneWithoutLoc } from '@babel/types';
 
 @Entity()

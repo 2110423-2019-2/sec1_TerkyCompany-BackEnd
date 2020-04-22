@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
-import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { MemberTEntity } from '../members-t/member-t.entity';
 
 export enum Subject {
 	Website = "website",

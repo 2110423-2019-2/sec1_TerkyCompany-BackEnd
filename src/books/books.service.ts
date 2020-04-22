@@ -1,18 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BookEntity } from './book.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
-import { Workshop } from 'src/workshops/workshop.entity';
-import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { Workshop } from '../workshops/workshop.entity';
+import { MemberTEntity } from '../members-t/member-t.entity';
+import { WorkshopRepository } from '../workshops/workshops.service';
+
+@EntityRepository(BookEntity)
+export class BookEntityRepository extends Repository<BookEntity> {}
 
 @Injectable()
 export class BooksService {
   constructor(
     @InjectRepository(BookEntity)
-    private bookRepository: Repository<BookEntity>,
+    private bookRepository: BookEntityRepository,
     @InjectRepository(Workshop)
-    private workshopRepository: Repository<Workshop>,
+    private workshopRepository: WorkshopRepository,
   ) {}
 
   async findOne(workshopID, username): Promise<BookEntity> {

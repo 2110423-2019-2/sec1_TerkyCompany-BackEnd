@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryColumn, OneToMany, ManyToOne } from 'typeorm';
-import { Workshop } from 'src/workshops/workshop.entity';
-import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { Workshop } from '../workshops/workshop.entity';
+import { MemberTEntity } from '../members-t/member-t.entity';
 
 @Entity()
 export class TagEntity {

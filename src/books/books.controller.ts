@@ -14,7 +14,7 @@ import { BookEntity } from './book.entity';
 import { BooksService } from './books.service';
 import { WorkshopsService } from '../workshops/workshops.service';
 import { FilesInterceptor } from '@nestjs/platform-express'
-import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { MemberTEntity } from '../members-t/member-t.entity';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 

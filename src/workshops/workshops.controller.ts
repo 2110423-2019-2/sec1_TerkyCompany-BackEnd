@@ -69,7 +69,8 @@ export class WorkshopsController {
     })
   }))
   async create(@Body() Request, @UploadedFiles() file): Promise<any> {
-    var workshopData:Workshop = JSON.parse(Request['request']); 
+    // var workshopData:Workshop = JSON.parse(Request['request']); 
+    var workshopData: Workshop = Request;
     
     console.log('cost: ' + workshopData.cost,)
 
@@ -79,7 +80,8 @@ export class WorkshopsController {
     if(workshopData.capacity < 1) workshopData.capacity = 1;
     else if(workshopData.capacity > 10000) workshopData.capacity = 10000;
 
-    workshopData['pictureURL'] = file[0].filename;
+    if(file != undefined)
+      workshopData['pictureURL'] = file[0].filename;
     
     return this.workshopsServices.create(workshopData);
   }
