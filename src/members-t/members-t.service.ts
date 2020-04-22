@@ -50,14 +50,6 @@ export class MembersTService {
     return await this.memberTRepository.save(memberTEntity);
   }
 
-  async ban(username: string): Promise<UpdateResult> {
-    return await this.memberTRepository.update(username, { isBanned: true });
-  }
-
-  async unban(username: string): Promise<UpdateResult> {
-    return await this.memberTRepository.update(username, { isBanned: false });
-  }
-
   async update(memberTEntity: MemberTEntity): Promise<UpdateResult> {
 
     return await this.memberTRepository.update(

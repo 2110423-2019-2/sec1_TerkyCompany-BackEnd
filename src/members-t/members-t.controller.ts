@@ -38,20 +38,6 @@ export class MembersTController {
   async create(@Body() memberTData: MemberTEntity): Promise<any> {
     return this.membersTServices.create(memberTData);
   }
-
-  @Put(':username/ban')
-  async ban(
-    @Param('username') username
-  ): Promise<any> {
-    return await this.membersTServices.ban(username);
-  }
-
-  @Put(':username/unban')
-  async unban(
-    @Param('username') username
-  ): Promise<any> {
-    return await this.membersTServices.unban(username);
-  }
   
   @Put(':username/update')
   async update(
