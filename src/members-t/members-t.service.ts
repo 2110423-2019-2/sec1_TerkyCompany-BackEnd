@@ -18,6 +18,10 @@ export class MembersTService {
     private memberTRepository: MemberTEntityRepository,
   ) { }
 
+  async findAllBannedList(): Promise<MemberTEntity[]> {
+    return await this.memberTRepository.find({ isBanned: true });
+  }
+
   async findByUsername(username: string): Promise<MemberTEntity | undefined> {
     // console.log(username + " is trying to login");
     // Don't forget await! Or you'll get Promise<Pending> as a result!
@@ -44,6 +48,14 @@ export class MembersTService {
     memberTEntity.password = hash;
     // console.log("Match:" + match);
     return await this.memberTRepository.save(memberTEntity);
+  }
+
+  async ban(username: string): Promise<UpdateResult> {
+    return await this.memberTRepository.update(username, { isBanned: true });
+  }
+
+  async unban(username: string): Promise<UpdateResult> {
+    return await this.memberTRepository.update(username, { isBanned: false });
   }
 
   async update(memberTEntity: MemberTEntity): Promise<UpdateResult> {

@@ -50,6 +50,9 @@ export class MemberTEntity {
   @Column('varchar', { length: 100 })
   profileURL: string;
 
+  @Column('boolean', { default: false, nullable: false })
+  isBanned: boolean;
+
   @OneToMany(
     type => ReviewEntity,
     reviews => reviews.memberT,

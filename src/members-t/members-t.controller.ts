@@ -24,9 +24,14 @@ export class MembersTController {
     return this.membersTServices.findAll();
   }
 
+  @Get('banned_list')
+  async findAllBannedList(): Promise<MemberTEntity[]> {
+    return await this.membersTServices.findAllBannedList();
+  }
+
   @Get('findbyusername/:id')
-  findbyusername(@Param('id') id): Promise<MemberTEntity | undefined>{
-    return this.membersTServices.findByUsername(id);
+  async findbyusername(@Param('id') id): Promise<MemberTEntity | undefined>{
+    return await this.membersTServices.findByUsername(id);
   }
 
   @Post('create')
@@ -34,6 +39,20 @@ export class MembersTController {
     return this.membersTServices.create(memberTData);
   }
 
+  @Put(':username/ban')
+  async ban(
+    @Param('username') username
+  ): Promise<any> {
+    return await this.membersTServices.ban(username);
+  }
+
+  @Put(':username/unban')
+  async unban(
+    @Param('username') username
+  ): Promise<any> {
+    return await this.membersTServices.unban(username);
+  }
+  
   @Put(':username/update')
   async update(
     @Param('username') username,
@@ -41,7 +60,7 @@ export class MembersTController {
   ): Promise<any> {
     memberTData.username = String(username);
     console.log('Update #' + memberTData.username);
-    return this.membersTServices.update(memberTData);
+    return await this.membersTServices.update(memberTData);
   }
 
   @Delete(':username/delete')

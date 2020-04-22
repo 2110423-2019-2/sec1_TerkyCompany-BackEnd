@@ -69,8 +69,8 @@ export class WorkshopsController {
     })
   }))
   async create(@Body() Request, @UploadedFiles() file): Promise<any> {
-    // var workshopData:Workshop = JSON.parse(Request['request']); 
-    var workshopData: Workshop = Request;
+    var workshopData: Workshop = JSON.parse(Request['request']); 
+    // var workshopData: Workshop = Request;
     
     console.log('cost: ' + workshopData.cost,)
 
