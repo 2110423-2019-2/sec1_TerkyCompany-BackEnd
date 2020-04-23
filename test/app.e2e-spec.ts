@@ -149,6 +149,17 @@ describe('E2E', () => {
             .expect(code);
     }
 
+    function w2testFunc(capacity, cost, code) {
+        var testBody = {
+            "capacity": capacity,
+            "cost": cost
+        }
+        return request(app.getHttpServer())
+            .put('/workshops/workshop2/update')
+            .send(testBody)
+            .expect(code);
+    }
+
     it('Test connection...', () => {
         return request(app.getHttpServer())
             .get('/')
@@ -649,6 +660,117 @@ describe('E2E', () => {
         it('Clean Workshop', () => {
             return request(app.getHttpServer())
                 .delete('/workshops/defaultworkshop/delete')
+                .expect(200);
+        })
+
+        it('Check if Workshop is cleaned', () => {
+            return request(app.getHttpServer())
+                .get('/workshops')
+                .expect(200)
+                .expect([]);
+        })
+
+        it('Clean MemberT', () => {
+            return request(app.getHttpServer())
+                .delete('/members-t/owner2/delete')
+                .expect(200);
+        })
+
+        it('Check if MemberT is cleaned', () => {
+            return request(app.getHttpServer())
+                .get('/members-t')
+                .expect(200)
+                .expect([]);
+        })
+    })
+
+    describe('[W2] Workshop Editing', () => {
+        it('Check if Workshop is empty', () => {
+            return request(app.getHttpServer())
+                .get('/workshops')
+                .expect(200)
+                .expect([]);
+        })
+
+        it('Check if MemberT is empty', () => {
+            return request(app.getHttpServer())
+                .get('/members-t')
+                .expect(200)
+                .expect([]);
+        })
+
+        it('Add MemberT Mock Data', () => {
+            return addMockData('/members-t');
+        })
+
+        it('Check MemberT Mock Data', () => {
+            return checkMockData('/members-t');
+        })
+
+        it('Add Workshop Mock Data', () => {
+            return addMockData('/workshops');
+        })
+
+        it('Check Workshop Mock Data', () => {
+            return checkMockData('/workshops');
+        })
+
+        // Test begins here
+        it('W2-01', () => {
+            return w2testFunc(-1, -0.5, 500);
+        })
+        /*
+        it('W1-02', () => {
+            return w1testFunc(-1, 50, 500);
+        })
+
+        it('W1-03', () => {
+            return w1testFunc(-1, 100000, 500);
+        })
+
+        it('W1-04', () => {
+            return w1testFunc(0, -0.5, 500);
+        })
+
+        it('W1-05', () => {
+            return w1testFunc(0, 50, 500);
+        })
+
+        it('W1-06', () => {
+            return w1testFunc(0, 100000, 500);
+        })
+
+        it('W1-07', () => {
+            return w1testFunc(100, -0.5, 500);
+        })
+
+        it('W1-08 Response Code: 201', () => {
+            return w1testFunc(100, 50, 201);
+        })
+
+        it('W1-08 Check the created Workshop', () => {
+            return checkMockData('/workshops')
+        })
+
+        it('W1-09', () => {
+            return w1testFunc(100, 100000, 500);
+        })
+
+        it('W1-10', () => {
+            return w1testFunc(10001, -0.5, 500);
+        })
+
+        it('W1-11', () => {
+            return w1testFunc(10001, 50, 500);
+        })
+
+        it('W1-12', () => {
+            return w1testFunc(10001, 100000, 500);
+        })
+        */
+        it('Clean Workshop', () => {
+            return request(app.getHttpServer())
+                .delete('/workshops/workshop2/delete')
                 .expect(200);
         })
 

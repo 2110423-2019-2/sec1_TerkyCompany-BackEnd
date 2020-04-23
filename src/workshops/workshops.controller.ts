@@ -73,7 +73,7 @@ export class WorkshopsController {
     // var workshopData:Workshop = JSON.parse(Request['request']); 
     var workshopData: Workshop = Request;
     
-    console.log('cost: ' + workshopData.cost,)
+    // console.log('cost: ' + workshopData.cost,)
 
     if(workshopData.cost < 0) {
       // workshopData.cost = 0;
@@ -103,12 +103,24 @@ export class WorkshopsController {
   async update(@Param('id') id, @Body() workshopData: Workshop): Promise<any> {
     workshopData.id = String(id);
     console.log('Update #' + workshopData.id);
+    console.log('cost: ' + workshopData.cost);
+    if(workshopData.cost < 0) {
+      // workshopData.cost = 0;
+      throw new InternalServerErrorException();
+    }
+    else if(workshopData.cost > 99999.99){
+      // workshopData.cost = 99999.99;
+      throw new InternalServerErrorException();
+    } 
 
-	if(workshopData.cost < 0) workshopData.cost = 0;
-	else if(workshopData.cost > 99999.99) workshopData.cost = 99999.99;
-
-	if(workshopData.capacity < 1) workshopData.capacity = 1;
-	else if(workshopData.capacity > 10000) workshopData.capacity = 10000;
+    if(workshopData.capacity < 1) {
+      // workshopData.capacity = 1;
+      throw new InternalServerErrorException();
+    }
+    else if(workshopData.capacity > 10000) {
+      // workshopData.capacity = 10000;
+      throw new InternalServerErrorException();
+    }
 
     return this.workshopsServices.update(workshopData);
   }
