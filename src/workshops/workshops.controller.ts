@@ -102,8 +102,8 @@ export class WorkshopsController {
   @Put(':id/update')
   async update(@Param('id') id, @Body() workshopData: Workshop): Promise<any> {
     workshopData.id = String(id);
-    console.log('Update #' + workshopData.id);
-    console.log('cost: ' + workshopData.cost);
+    // console.log('Update #' + workshopData.id);
+    // console.log('cost: ' + workshopData.cost);
     if(workshopData.cost < 0) {
       // workshopData.cost = 0;
       throw new InternalServerErrorException();

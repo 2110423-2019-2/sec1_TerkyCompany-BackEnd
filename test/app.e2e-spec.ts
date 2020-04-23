@@ -61,7 +61,7 @@ const mockWorkshop = {
     "speakerName": "Too",
     "owner": "owner2",
     "capacity": 80,
-    "cost": 100
+    "cost": 1
 }
 
 describe('E2E', () => {
@@ -719,55 +719,62 @@ describe('E2E', () => {
         it('W2-01', () => {
             return w2testFunc(-1, -0.5, 500);
         })
-        /*
-        it('W1-02', () => {
-            return w1testFunc(-1, 50, 500);
+
+        it('W2-02', () => {
+            return w2testFunc(-1, 50, 500);
         })
 
-        it('W1-03', () => {
-            return w1testFunc(-1, 100000, 500);
+        it('W2-03', () => {
+            return w2testFunc(-1, 100000, 500);
         })
 
-        it('W1-04', () => {
-            return w1testFunc(0, -0.5, 500);
+        it('W2-04', () => {
+            return w2testFunc(0, -0.5, 500);
         })
 
-        it('W1-05', () => {
-            return w1testFunc(0, 50, 500);
+        it('W2-05', () => {
+            return w2testFunc(0, 50, 500);
         })
 
-        it('W1-06', () => {
-            return w1testFunc(0, 100000, 500);
+        it('W2-06', () => {
+            return w2testFunc(0, 100000, 500);
         })
 
-        it('W1-07', () => {
-            return w1testFunc(100, -0.5, 500);
+        it('W2-07', () => {
+            return w2testFunc(100, -0.5, 500);
         })
 
-        it('W1-08 Response Code: 201', () => {
-            return w1testFunc(100, 50, 201);
+        it('W2-08 Response Code: 200', () => {
+            return w2testFunc(100, 50, 200);
         })
 
-        it('W1-08 Check the created Workshop', () => {
-            return checkMockData('/workshops')
+        it('W2-08 Check if the workshop is updated', () => {
+            return request(app.getHttpServer())
+            .get('/workshops')
+            .expect(200)
+            .expect(response => {
+                console.log(JSON.parse(response.text));
+                if(JSON.parse(response.text)[0].capacity != 100 || JSON.parse(response.text)[0].cost != 50.00) 
+                    throw new Error("The value did not updated correctly");
+            });
         })
 
-        it('W1-09', () => {
-            return w1testFunc(100, 100000, 500);
+        it('W2-09', () => {
+            return w2testFunc(100, 100000, 500);
         })
 
-        it('W1-10', () => {
-            return w1testFunc(10001, -0.5, 500);
+        it('W2-10', () => {
+            return w2testFunc(10001, -0.5, 500);
         })
 
-        it('W1-11', () => {
-            return w1testFunc(10001, 50, 500);
+        it('W2-11', () => {
+            return w2testFunc(10001, 50, 500);
         })
 
-        it('W1-12', () => {
-            return w1testFunc(10001, 100000, 500);
+        it('W2-12', () => {
+            return w2testFunc(10001, 100000, 500);
         })
-        */
+
         it('Clean Workshop', () => {
             return request(app.getHttpServer())
                 .delete('/workshops/workshop2/delete')
