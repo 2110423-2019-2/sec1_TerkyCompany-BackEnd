@@ -12,8 +12,8 @@ export class PaymentService {
         console.log(paymentDto)
         try {
             var omise = require('omise')({
-                'secretKey': 'skey_test_5jasznzd3mff0xhs8nm',
-                'publicKey': 'pkey_test_5jat0453twxxl7wh47y'
+                'secretKey': process.env.OMISE_SECRET_KEY,
+                'publicKey': process.env.OMISE_PUBLIC_KEY
             });
             const email = paymentDto.email;
             const name = paymentDto.name;

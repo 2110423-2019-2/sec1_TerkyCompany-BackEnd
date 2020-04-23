@@ -15,8 +15,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
+  require('dotenv').config()
+
   app.enableCors();
   app.use(bodyParser.json());
-  await app.listen(3001);
+  await app.listen(process.env.PORT);
 }
 bootstrap();

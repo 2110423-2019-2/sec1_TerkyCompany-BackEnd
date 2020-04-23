@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^6.11.5",
-    "@nestjs/config": "^0.2.2",
+    "@nestjs/config": "^0.2.4",
     "@nestjs/core": "^6.11.5",
     "@nestjs/jwt": "^6.1.1",
     "@nestjs/passport": "^6.1.1",
@@ -35,7 +35,9 @@
     "class-sanitizer": "0.0.5",
     "class-validator": "^0.12.0-rc.0",
     "cors": "^2.8.5",
+    "env-cmd": "^10.1.0",
     "mysql": "^2.18.1",
+    "nestjs-easyconfig": "^1.8.10",
     "omise": "^0.6.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

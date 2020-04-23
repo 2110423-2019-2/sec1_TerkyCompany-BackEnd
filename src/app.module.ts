@@ -13,18 +13,19 @@ import { BooksModule } from './books/books.module';
 import { TagsModule } from './tags/tags.module';
 import { AuthModule } from './auth/auth.module';
 import { MulterModule } from '@nestjs/platform-express';
-
 import { PaymentModule } from './payment/payment.module';
+import { EasyconfigModule } from 'nestjs-easyconfig';
 
 @Module({
   imports: [
+    EasyconfigModule.register({ path: './config/.env' }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: process.env.TYPEORM_HOST,
       port: 3306,
-      username: 'root',
-      password: '123456',
-      database: 'se_matcher',
+      username: process.env.TYPEORM_USERNAME,
+      password: process.env.TYPEORM_PASSWORD,
+      database: process.env.TYPEORM_DATABASE,
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
     }),
