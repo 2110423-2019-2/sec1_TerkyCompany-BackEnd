@@ -3,9 +3,7 @@ import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Workshop } from './workshop.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
-
-@EntityRepository(Workshop)
-export class WorkshopRepository extends Repository<Workshop> {}
+import { WorkshopRepository } from './workshop.repository';
 
 @Injectable()
 export class WorkshopsService {

@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MembersTController } from './members-t.controller';
 import { MembersTService, MemberTEntityRepository } from './members-t.service';
+import * as request from 'supertest';
 
 describe('MembersT Controller', () => {
     let controller: MembersTController;

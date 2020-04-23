@@ -5,7 +5,7 @@ import { BookEntity } from './book.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
 import { Workshop } from '../workshops/workshop.entity';
 import { MemberTEntity } from '../members-t/member-t.entity';
-import { WorkshopRepository } from '../workshops/workshops.service';
+import { WorkshopRepository } from '../workshops/workshop.repository';
 
 @EntityRepository(BookEntity)
 export class BookEntityRepository extends Repository<BookEntity> {}

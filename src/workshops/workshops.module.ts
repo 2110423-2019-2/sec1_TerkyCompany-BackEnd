@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { WorkshopsService, WorkshopRepository } from './workshops.service';
+import { WorkshopsService } from './workshops.service';
 import { WorkshopsController } from './workshops.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Workshop } from './workshop.entity';

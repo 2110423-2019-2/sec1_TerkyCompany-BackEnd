@@ -35,6 +35,7 @@
     "class-sanitizer": "0.0.5",
     "class-validator": "^0.12.0-rc.0",
     "cors": "^2.8.5",
+    "mocha": "^7.1.1",
     "mysql": "^2.18.1",
     "omise": "^0.6.0",
     "passport": "^0.4.1",

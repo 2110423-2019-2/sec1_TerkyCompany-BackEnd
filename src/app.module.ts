@@ -27,6 +27,7 @@ import { PaymentModule } from './payment/payment.module';
       database: 'se_matcher',
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
+      keepConnectionAlive: true,
     }),
     WorkshopsModule,
     MembersTModule,

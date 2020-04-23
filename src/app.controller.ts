@@ -12,13 +12,14 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller()
 export class AppController {
-	constructor(private readonly authService: AuthService) {}
-	/*
+	constructor(private readonly authService: AuthService,
+		private readonly appService: AppService) {}
+	
 	@Get()
 	getHello(): string {
 		return this.appService.getHello();
 	}
-	*/
+	
 	@UseGuards(LocalAuthGuard)
 	@Post('auth/login')
 	async login(@Request() req){
