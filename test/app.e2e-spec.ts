@@ -1,103 +1,170 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { response } from 'express';
 import { doesNotReject } from 'assert';
 
-const memberTBody = {
-  "username": "owner6",
-  "password": "password",
-  "email": "too_w_o@hotmail.com",
-  "dateOfBirth": "2012-04-23",
-  "fullname": "Thanit Tativannarat",
-  "gender": "male",
-  "isSuspended": false,
-  "participantFlag": false,
-  "ownerFlag": true,
-  "organization": "DataLabs",
-  "nationalID": "123123123",
-  "profileURL": ""
+const defaultMemberTBody = {
+    "username": "aaa",
+    "password": "bbb",
+    "organization": "Game Lab",
+    "email": "pon@terkycompany.com",
+    "dateOfBirth": "1999-03-23",
+    "fullname": "Phatcharapon Jumruspun",
+    "gender": "male",
+    "isSuspended": false,
+    "userType": "owner",
+    "nationalID": "ccc"
+    //"profileURL": ""
 }
 
+
+
 describe('E2E', () => {
-  
-  let app;
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-    
-    app = moduleFixture.createNestApplication();
-    await app.init();
-  });
-  
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });
+    let app;
 
-  describe('Review', () => {
-    it('/reviews (GET)', () => {
-      return request(app.getHttpServer())
-        .get('/reviews')
-        .expect(200)
-        .expect([]);
-    })
-  })
+    beforeEach(async () => {
+        const moduleFixture: TestingModule = await Test.createTestingModule({
+            imports: [AppModule],
+        }).compile();
 
-  describe('MemberT', () => {
-    it('/members-t (GET)', () =>{ 
-      return request(app.getHttpServer())
-      .get('/members-t')
-      .expect(200)
-      .expect([]);
-    })
+        app = moduleFixture.createNestApplication();
+        await app.init();
+    });
+/*
+    afterAll(async () => {
+        return request(app.getHttpServer())
+            .delete('/members-t/username/delete')
+            .expect(200);
+    });
+*/
+    function m2testFunc(username, password, nationalID, code) {
+        var testBody = defaultMemberTBody;
+        testBody.username = username;
+        testBody.password = password;
+        testBody.nationalID = nationalID;
+        return request(app.getHttpServer())
+            .post('/members-t/create')
+            .send(testBody)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(code);
+    }
 
-    it('/members-t (POST)', () => {
-      return request(app.getHttpServer())
-      .post('/members-t/create')
-      .expect(500)
-    })
+    it('Test connection...', () => {
+        return request(app.getHttpServer())
+            .get('/')
+            .expect(200)
+            .expect('Hello World!');
+    });
 
-    it('/members-t (POST with valid gender)', () => {
-      return request(app.getHttpServer())
-      .post('/members-t/create')
-      .send(memberTBody)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(201)
-    })
+    describe('M2 Test cases', () => {
+        it('Check if MemberT is empty', () => {
+            return request(app.getHttpServer())
+                .get('/members-t')
+                .expect(200)
+                .expect([]);
+        })
 
-    it('/members-t (POST with invalid gender)', () => {
-      var memberTInvalidGender = memberTBody;
-      memberTInvalidGender.gender = "asdfjkl"
-      return request(app.getHttpServer())
-      .post('/members-t/create')
-      .send(memberTInvalidGender)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(500)
+        it('M2-01', () => {
+            return m2testFunc(
+                "user",
+                "pas",
+                "abc",
+                500
+            );
+        })
+
+        it('M2-20 Status Code 201', () => {
+            return m2testFunc(
+                "username",
+                "password",
+                "1234567890123",
+                201
+            );
+        })
+
+        it('M2-20 Create MemberT', () => {
+            return request(app.getHttpServer())
+                .get('/members-t')
+                .expect(200)
+                .expect(response => {
+                    //console.log(JSON.parse(response.text));
+                    if(JSON.parse(response.text)[0].username != "username") 
+                        throw new Error('Wrong Response');
+                })
+        })
+
+        it('Clean MemberT', () => {
+            return request(app.getHttpServer())
+            .delete('/members-t/username/delete')
+            .expect(200);
+        })
+
+        it('Check if MemberT is cleaned', () => {
+            return request(app.getHttpServer())
+                .get('/members-t')
+                .expect(200)
+                .expect([]);
+        })
     })
     /*
-    it('/members-t (UPDATE with valid gender)', () => {
+    describe('Review', () => {
+        it('/reviews (GET)', () => {
+            return request(app.getHttpServer())
+                .get('/reviews')
+                .expect(200)
+                .expect([]);
+        })
+    })
 
+    describe('MemberT', () => {
+        it('/members-t (GET)', () => {
+            return request(app.getHttpServer())
+                .get('/members-t')
+                .expect(200)
+                .expect([]);
+        })
+
+        it('/members-t (POST)', () => {
+            return request(app.getHttpServer())
+                .post('/members-t/create')
+                .expect(500)
+        })
+
+        it('/members-t (POST with valid gender)', () => {
+            return request(app.getHttpServer())
+                .post('/members-t/create')
+                .send(memberTBody)
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(201)
+        })
+
+        it('/members-t (POST with invalid gender)', () => {
+            var memberTInvalidGender = memberTBody;
+            memberTInvalidGender.gender = "asdfjkl"
+            return request(app.getHttpServer())
+                .post('/members-t/create')
+                .send(memberTInvalidGender)
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(500)
+        })
+
+        it('/delete (DELETE)', () => {
+            return request(app.getHttpServer())
+                .delete('/members-t/owner6/delete')
+                .expect(200)
+        })
+
+        it('Verify the deletion', () => {
+            return request(app.getHttpServer())
+                .get('/members-t')
+                .expect(200)
+                .expect([]);
+        })
     })
     */
-    it('/delete (DELETE)', () => {
-      return request(app.getHttpServer())
-      .delete('/members-t/owner6/delete')
-      .expect(200)
-    })
 
-    it('Verify the deletion', () =>{ 
-      return request(app.getHttpServer())
-      .get('/members-t')
-      .expect(200)
-      .expect([]);
-    })
-  })
-  
 });
