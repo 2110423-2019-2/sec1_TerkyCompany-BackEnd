@@ -3,3 +3,4 @@ dist
 .vs
 .github
 .gitignore
+Dockerrun.aws.json

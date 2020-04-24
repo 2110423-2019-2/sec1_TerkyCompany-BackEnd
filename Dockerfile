@@ -1,11 +1,17 @@
-FROM node:12.14
+FROM node:12
+
+RUN npm install -g nodemon
 
 WORKDIR /home/node/app
 
 COPY package*.json ./
+
 RUN npm install
+
 COPY . .
 
-RUN npm build
 EXPOSE 8080
-ENTRYPOINT npm start
+
+RUN npm build
+
+CMD "npm" "start"

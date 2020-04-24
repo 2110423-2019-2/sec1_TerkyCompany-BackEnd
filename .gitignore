@@ -4,6 +4,7 @@
 
 # config
 /config/.env
+.env
 
 # upload picture
 /uploads
