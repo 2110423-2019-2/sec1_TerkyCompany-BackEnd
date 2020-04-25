@@ -18,6 +18,7 @@ import { WorkshopsService } from './workshops.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { response } from 'express';
 
 @Controller('workshops')
 export class WorkshopsController {
@@ -61,37 +62,48 @@ export class WorkshopsController {
   // }
 
 
-  @Post('create')
-  async create(@Req() request,@Res() response): Promise<any> {
-    console.log(request)
-    // var workshopData: Workshop = JSON.parse(request.body['request']);
-    // console.log(workshopData)
-    // var workshopData: Workshop = Request;
-    
-    // console.log('cost: ' + workshopData.cost,)
-
-    // if(workshopData.cost < 0) workshopData.cost = 0;
-    // else if(workshopData.cost > 99999.99) workshopData.cost = 99999.99;
-
-    // if(workshopData.capacity < 1) workshopData.capacity = 1;
-    // else if(workshopData.capacity > 10000) workshopData.capacity = 10000;
-
-    //S3
+  @Post('fileupload')
+  async fileupload(@Req() request, @Res() respond) {
     try {
-      await this.workshopsServices.fileupload(request, response);
+      await this.workshopsServices.fileupload(request, respond);
     } catch (error) {
       return response
         .status(500)
         .json(`Failed to upload image file: ${error.message}`);
     }
+  }
 
-    return 'yea'
+  @Post('create')
+  async create(@Body() workshopData: Workshop): Promise<any> {
+    // console.log(request);
+    // var workshopData: Workshop = JSON.parse(request.body['request']);
+    // console.log(workshopData)
+    // var workshopData: Workshop = Request;
+    
+    console.log('cost: ' + workshopData.cost,)
+
+    if(workshopData.cost < 0) workshopData.cost = 0;
+    else if(workshopData.cost > 99999.99) workshopData.cost = 99999.99;
+
+    if(workshopData.capacity < 1) workshopData.capacity = 1;
+    else if(workshopData.capacity > 10000) workshopData.capacity = 10000;
+
+    // //S3
+    // try {
+    //   await this.workshopsServices.fileupload(request, response);
+    // } catch (error) {
+    //   return response
+    //     .status(500)
+    //     .json(`Failed to upload image file: ${error.message}`);
+    // }
+
+    // return 'yea'
 
     // console.log("response from upload file")
     // console.log(response)
     // workshopData['pictureURL'] = response.json();
     
-    // return this.workshopsServices.create(workshopData);
+    return await this.workshopsServices.create(workshopData);
   }
 
   @Put(':id/update')
