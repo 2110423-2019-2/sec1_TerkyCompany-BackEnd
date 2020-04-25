@@ -58,9 +58,9 @@ export class MembersTService {
     );
   }
 
-  async setProfile(username: number, image_path: string) {
-    return await this.memberTRepository.update(username, { profileURL: image_path });
-  }
+  // async setProfile(username: number, image_path: string) {
+  //   return await this.memberTRepository.update(username, { profileURL: image_path });
+  // }
 
   async delete(username): Promise<DeleteResult> {
     return await this.memberTRepository.delete(username);

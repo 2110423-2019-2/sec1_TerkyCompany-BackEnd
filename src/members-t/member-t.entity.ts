@@ -47,8 +47,8 @@ export class MemberTEntity {
   @Column('varchar', { length: 13, nullable: false })
   nationalID: string;
 
-  @Column('varchar', { length: 100 })
-  profileURL: string;
+  // @Column('varchar', { length: 100 })
+  // profileURL: string;
 
   @Column('boolean', { default: false, nullable: false })
   isBanned: boolean;

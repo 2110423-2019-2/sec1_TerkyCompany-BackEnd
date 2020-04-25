@@ -55,32 +55,32 @@ export class MembersTController {
   }
 
   // upload picture on local 
-  @Post(':username/profile')
-  @UseInterceptors(FilesInterceptor('image', 1, {
-    fileFilter: imageFileFilter,
-  }))
-  async setProfile(@UploadedFiles() file, @Param('username') username): Promise<any> {
-    // ! Caution: The current path is /sec1_TerkyCompany_Backend/
-    var memberTData = this.membersTServices.findByUsername(username);
-    console.log(memberTData)
-    if (memberTData['username'] == null)
-      return "Please send a profile via existing username"
-    return this.membersTServices.setProfile(username, file[0].filename);
-	}
+  // @Post(':username/profile')
+  // @UseInterceptors(FilesInterceptor('image', 1, {
+  //   fileFilter: imageFileFilter,
+  // }))
+  // async setProfile(@UploadedFiles() file, @Param('username') username): Promise<any> {
+  //   // ! Caution: The current path is /sec1_TerkyCompany_Backend/
+  //   var memberTData = this.membersTServices.findByUsername(username);
+  //   console.log(memberTData)
+  //   if (memberTData['username'] == null)
+  //     return "Please send a profile via existing username"
+  //   return this.membersTServices.setProfile(username, file[0].filename);
+	// }
 
-  @Get(':username/profile')
-  async getProfile(@Param('username') username, @Res() res) {
-    var memberTData = await (this.membersTServices.findByUsername(username));
-    console.log(memberTData);
-    return res.sendFile(memberTData['profileURL'], { root: './uploads'});
-  }
+  // @Get(':username/profile')
+  // async getProfile(@Param('username') username, @Res() res) {
+  //   var memberTData = await (this.membersTServices.findByUsername(username));
+  //   console.log(memberTData);
+  //   return res.sendFile(memberTData['profileURL'], { root: './uploads'});
+  // }
   
 }
 
 // -- filter extension
-export const imageFileFilter = (req, file, callback) => {
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-    return callback(new Error('Only image files are allowed!'), false);
-  }
-  callback(null, true);
-}
+// export const imageFileFilter = (req, file, callback) => {
+//   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+//     return callback(new Error('Only image files are allowed!'), false);
+//   }
+//   callback(null, true);
+// }
