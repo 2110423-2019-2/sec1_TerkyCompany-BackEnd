@@ -76,7 +76,7 @@ export class WorkshopsController {
   @Post('create')
   async create(@Body() workshopData: Workshop): Promise<any> {
     // console.log(request);
-    // var workshopData: Workshop = JSON.parse(request.body['request']);
+    // var workshopData: Workshop = JSON.parse(workshopData['request']);
     // console.log(workshopData)
     // var workshopData: Workshop = Request;
     
@@ -127,7 +127,7 @@ export class WorkshopsController {
 
   @Get(':workshopID/picture')
   getProfile(@Param('workshopID') workshopID, @Res() res) {
-    var workshopData = await (this.workshopsServices.findByID(workshopID));
+    var workshopData = (this.workshopsServices.findByID(workshopID));
     if (workshopData['pictureURL'] == '')
       return 'Failed to get the image' 
     return workshopData['pictureURL'];
@@ -150,4 +150,4 @@ export class WorkshopsController {
 //     .map(() => Math.round(Math.random() * 16).toString(16))
 //     .join('');
 //   callback(null, `${name}-${randomName}${fileExtName}`);
-};
+// };
