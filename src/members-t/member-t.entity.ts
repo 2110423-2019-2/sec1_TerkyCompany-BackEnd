@@ -10,7 +10,8 @@ export enum Gender {
 
 export enum UserType {
 	Participant = "participant",
-	Owner = "owner",
+  Owner = "owner",
+  Admin = "admin"
 }
 
 @Entity()
