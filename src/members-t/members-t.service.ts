@@ -51,7 +51,8 @@ export class MembersTService {
   }
 
   async update(memberTEntity: MemberTEntity): Promise<UpdateResult> {
-
+    var hash = AuthService.hashPasswordSync(memberTEntity.password, 12);
+    memberTEntity.password=hash
     return await this.memberTRepository.update(
       memberTEntity.username,
       memberTEntity,
