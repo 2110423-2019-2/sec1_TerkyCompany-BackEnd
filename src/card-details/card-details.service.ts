@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CardDetailEntity } from './card-detail.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
+
+@EntityRepository(CardDetailEntity)
+export class CardDetailEntityRepository extends Repository<CardDetailEntity> {}
 
 @Injectable()
 export class CardDetailsService {
   constructor(
     @InjectRepository(CardDetailEntity)
-    private cardDetailRepository: Repository<CardDetailEntity>,
+    private cardDetailRepository: CardDetailEntityRepository,
   ) {}
 
   async findAll(): Promise<CardDetailEntity[]> {

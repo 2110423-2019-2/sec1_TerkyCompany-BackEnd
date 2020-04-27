@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from 'typeorm';
-import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { MemberTEntity } from '../members-t/member-t.entity';
 
 @Entity()
 export class CardDetailEntity {

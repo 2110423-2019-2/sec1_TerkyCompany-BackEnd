@@ -1,21 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MemberTEntity } from './member-t.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { callbackify } from 'util';
+
+@EntityRepository(MemberTEntity)
+export class MemberTEntityRepository extends Repository<MemberTEntity> {
+
+}
 
 @Injectable()
 export class MembersTService {
-
-  private readonly memberTEntities: MemberTEntity[];
-
-
   constructor(
     @InjectRepository(MemberTEntity)
-    private memberTRepository: Repository<MemberTEntity>,
+    private memberTRepository: MemberTEntityRepository,
   ) { }
+
+  async findAllBannedList(): Promise<MemberTEntity[]> {
+    return await this.memberTRepository.find({ isBanned: true });
+  }
 
   async findByUsername(username: string): Promise<MemberTEntity | undefined> {
     // console.log(username + " is trying to login");
@@ -46,16 +51,19 @@ export class MembersTService {
   }
 
   async update(memberTEntity: MemberTEntity): Promise<UpdateResult> {
-
+    if (memberTEntity.password) {
+      var hash = AuthService.hashPasswordSync(memberTEntity.password, 12);
+      memberTEntity.password=hash
+    }
     return await this.memberTRepository.update(
-      memberTEntity.username,
+      memberTEntity.username, 
       memberTEntity,
     );
   }
 
-  async setProfile(username: number, image_path: string) {
-    return await this.memberTRepository.update(username, { profileURL: image_path });
-  }
+  // async setProfile(username: number, image_path: string) {
+  //   return await this.memberTRepository.update(username, { profileURL: image_path });
+  // }
 
   async delete(username): Promise<DeleteResult> {
     return await this.memberTRepository.delete(username);

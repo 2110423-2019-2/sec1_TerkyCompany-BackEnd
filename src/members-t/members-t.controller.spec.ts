@@ -1,18 +1,20 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { MembersTController } from './members-t.controller';
+import { Test, TestingModule } from '@nestjs/testing';
+import { MembersTController } from './members-t.controller';
+import { MembersTService, MemberTEntityRepository } from './members-t.service';
 
-// describe('MembersT Controller', () => {
-//   let controller: MembersTController;
+describe('MembersT Controller', () => {
+    let controller: MembersTController;
 
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       controllers: [MembersTController],
-//     }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+        controllers: [MembersTController],
+        providers: [MembersTService, MemberTEntityRepository],
+    }).compile();
 
-//     controller = module.get<MembersTController>(MembersTController);
-//   });
+        controller = module.get<MembersTController>(MembersTController);
+    });
 
-//   it('should be defined', () => {
-//     expect(controller).toBeDefined();
-//   });
-// });
+    it('should be defined', () => {
+        expect(controller).toBeDefined();
+    });
+});

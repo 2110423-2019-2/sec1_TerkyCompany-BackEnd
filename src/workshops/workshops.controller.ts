@@ -7,6 +7,7 @@ import {
   Body,
   Param,
   Query,
+  Req,
   UseInterceptors,
   UploadedFiles,
   Res, 
@@ -17,6 +18,7 @@ import { WorkshopsService } from './workshops.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { response } from 'express';
 
 @Controller('workshops')
 export class WorkshopsController {
@@ -60,16 +62,23 @@ export class WorkshopsController {
   // }
 
 
+  @Post('fileupload')
+  async fileupload(@Req() request, @Res() respond) {
+    try {
+      await this.workshopsServices.fileupload(request, respond);
+    } catch (error) {
+      return response
+        .status(500)
+        .json(`Failed to upload image file: ${error.message}`);
+    }
+  }
+
   @Post('create')
-  @UseInterceptors(FilesInterceptor('image', 1, {
-    fileFilter: imageFileFilter,
-    storage: diskStorage({
-      destination: './uploads/workshop_picture',
-      filename: editFileName
-    })
-  }))
-  async create(@Body() Request, @UploadedFiles() file): Promise<any> {
-    var workshopData:Workshop = JSON.parse(Request['request']); 
+  async create(@Body() workshopData: Workshop): Promise<any> {
+    // console.log(request);
+    // var workshopData: Workshop = JSON.parse(workshopData['request']);
+    // console.log(workshopData)
+    // var workshopData: Workshop = Request;
     
     console.log('cost: ' + workshopData.cost,)
 
@@ -79,9 +88,22 @@ export class WorkshopsController {
     if(workshopData.capacity < 1) workshopData.capacity = 1;
     else if(workshopData.capacity > 10000) workshopData.capacity = 10000;
 
-    workshopData['pictureURL'] = file[0].filename;
+    // //S3
+    // try {
+    //   await this.workshopsServices.fileupload(request, response);
+    // } catch (error) {
+    //   return response
+    //     .status(500)
+    //     .json(`Failed to upload image file: ${error.message}`);
+    // }
+
+    // return 'yea'
+
+    // console.log("response from upload file")
+    // console.log(response)
+    // workshopData['pictureURL'] = response.json();
     
-    return this.workshopsServices.create(workshopData);
+    return await this.workshopsServices.create(workshopData);
   }
 
   @Put(':id/update')
@@ -104,27 +126,28 @@ export class WorkshopsController {
   }
 
   @Get(':workshopID/picture')
-  async getProfile(@Param('workshopID') workshopID, @Res() res) {
-    var workshopData = await (this.workshopsServices.findByID(workshopID));
-    console.log(workshopData)
-    return res.sendFile(workshopData['pictureURL'], { root: './uploads/workshop_picture'});
+  getProfile(@Param('workshopID') workshopID, @Res() res) {
+    var workshopData = (this.workshopsServices.findByID(workshopID));
+    if (workshopData['pictureURL'] == '')
+      return 'Failed to get the image' 
+    return workshopData['pictureURL'];
   }
 }
 
 // -- filter extension
-export const imageFileFilter = (req, file, callback) => {
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-    return callback(new Error('Only image files are allowed!'), false);
-  }
-  callback(null, true);
-}
+// export const imageFileFilter = (req, file, callback) => {
+//   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+//     return callback(new Error('Only image files are allowed!'), false);
+//   }
+//   callback(null, true);
+// }
 
-export const editFileName = (req, file, callback) => {
-  const name = file.originalname.split('.')[0];
-  const fileExtName = extname(file.originalname);
-  const randomName = Array(4)
-    .fill(null)
-    .map(() => Math.round(Math.random() * 16).toString(16))
-    .join('');
-  callback(null, `${name}-${randomName}${fileExtName}`);
-};
+// export const editFileName = (req, file, callback) => {
+//   const name = file.originalname.split('.')[0];
+//   const fileExtName = extname(file.originalname);
+//   const randomName = Array(4)
+//     .fill(null)
+//     .map(() => Math.round(Math.random() * 16).toString(16))
+//     .join('');
+//   callback(null, `${name}-${randomName}${fileExtName}`);
+// };

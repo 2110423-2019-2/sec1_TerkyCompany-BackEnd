@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TagEntity } from './tag.entity';
 import { DeleteResult } from 'typeorm';
+
+@EntityRepository(TagEntity)
+export class TagEntityRepository extends Repository<TagEntity> {}
 
 @Injectable()
 export class TagsService {
 
 	constructor(
 		@InjectRepository(TagEntity)
-		private tagRepository: Repository<TagEntity>,
+		private tagRepository: TagEntityRepository,
 	) {}
 
 	async findAll(): Promise<TagEntity[]> {

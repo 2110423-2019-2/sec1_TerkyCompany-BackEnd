@@ -1,8 +1,12 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { MembersTService } from 'src/members-t/members-t.service';
+import { MembersTService } from '../members-t/members-t.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
-import { MemberTEntity } from 'src/members-t/member-t.entity';
+import { MemberTEntity } from '../members-t/member-t.entity';
+import { Repository, EntityRepository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+
+
 
 @Injectable()
 export class AuthService {
@@ -10,7 +14,7 @@ export class AuthService {
 		private readonly membersTService: MembersTService,
 		private readonly jwtService: JwtService,
 		
-	) {}
+	) { }
 
 	async validateUser(username: string, password: string): Promise<any> {
 		console.log("validateUser: AuthService");
@@ -93,9 +97,14 @@ export class AuthService {
 			username: user.username, 
 			userType: user.userType,
 		};
+		//console.log("logged in",user.username)
+		const status = await this.membersTService.findByUsername(user.username);
+		console.log(`username : ${status.username} , isSuspended : ${status.isSuspended}`)
+		
 		// console.log(payload);
 		return {
 			access_token: this.jwtService.sign(payload),
+			isSuspended: status.isSuspended
 		};
 	}
 }
