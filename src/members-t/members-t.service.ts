@@ -51,11 +51,12 @@ export class MembersTService {
   }
 
   async update(memberTEntity: MemberTEntity): Promise<UpdateResult> {
-    var hash = AuthService.hashPasswordSync(memberTEntity.password, 12);
-    var match = AuthService.compareSync(memberTEntity.password, hash);
-    memberTEntity.password = hash;
+    if (memberTEntity.password) {
+      var hash = AuthService.hashPasswordSync(memberTEntity.password, 12);
+      memberTEntity.password=hash
+    }
     return await this.memberTRepository.update(
-      memberTEntity.username,
+      memberTEntity.username, 
       memberTEntity,
     );
   }
